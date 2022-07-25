@@ -10,7 +10,7 @@ import {
   setOpenModal,
   updateActiveNetworkVersion,
 } from './actions'
-import { EthereumNetworkInfo } from '../../constants/networks'
+import { milkomedaNetworkOptions } from '../../constants/networks'
 
 type PopupList = Array<{ key: string; show: boolean; content: PopupContent; removeAfterMs: number | null }>
 
@@ -35,7 +35,7 @@ const initialState: ApplicationState = {
     syncedBlock: undefined,
     headBlock: undefined,
   },
-  activeNetworkVersion: EthereumNetworkInfo,
+  activeNetworkVersion: milkomedaNetworkOptions,
 }
 
 export default createReducer(initialState, (builder) =>
@@ -76,6 +76,8 @@ export default createReducer(initialState, (builder) =>
       }
     })
     .addCase(updateActiveNetworkVersion, (state, { payload: { activeNetworkVersion } }) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       state.activeNetworkVersion = activeNetworkVersion
     })
 )

@@ -1,13 +1,9 @@
-import OPTIMISM_LOGO_URL from '../assets/images/optimism.svg'
-import ARBITRUM_LOGO_URL from '../assets/images/arbitrum.svg'
-import ETHEREUM_LOGO_URL from '../assets/images/ethereum-logo.png'
-import POLYGON_LOGO_URL from '../assets/images/polygon-logo.png'
+import MILKOMEDA_LOGO_URL from '../assets/images/milkomeda-logo.png'
+import { blockClient, client } from '../apollo/client'
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 
 export enum SupportedNetwork {
-  ETHEREUM,
-  ARBITRUM,
-  OPTIMISM,
-  POLYGON,
+  MILKOMEDA = 'MILKOMEDA',
 }
 
 export type NetworkInfo = {
@@ -19,54 +15,33 @@ export type NetworkInfo = {
   primaryColor: string
   secondaryColor: string
   blurb?: string
+  //TODO перевести на одну схему, как будет бэк
+  client: ApolloClient<NormalizedCacheObject>
+  blockClient: ApolloClient<NormalizedCacheObject>
+  healthCheckName: string
+  etherscanLinkPrefix: string
 }
 
-export const EthereumNetworkInfo: NetworkInfo = {
-  id: SupportedNetwork.ETHEREUM,
+//TODO поправить опции в соответсвии с дизайном
+export const milkomedaNetworkOptions: NetworkInfo = {
+  id: SupportedNetwork.MILKOMEDA,
   route: '',
-  name: 'Ethereum',
+  name: 'Milkomeda',
   bgColor: '#fc077d',
   primaryColor: '#fc077d',
   secondaryColor: '#2172E5',
-  imageURL: ETHEREUM_LOGO_URL,
+  imageURL: MILKOMEDA_LOGO_URL,
+  client: client,
+  blockClient: blockClient,
+  healthCheckName: 'uniswap/uniswap-v3',
+  //TODO стоит ли держать в опциях?
+  etherscanLinkPrefix: 'https://',
 }
 
-export const ArbitrumNetworkInfo: NetworkInfo = {
-  id: SupportedNetwork.ARBITRUM,
-  route: 'arbitrum',
-  name: 'Arbitrum',
-  imageURL: ARBITRUM_LOGO_URL,
-  bgColor: '#0A294B',
-  primaryColor: '#0490ED',
-  secondaryColor: '#96BEDC',
-  blurb: 'Beta',
-}
+export const mappedSupportedNetworks: NetworkInfo[] = [milkomedaNetworkOptions]
 
-export const OptimismNetworkInfo: NetworkInfo = {
-  id: SupportedNetwork.OPTIMISM,
-  route: 'optimism',
-  name: 'Optimism',
-  bgColor: '#F01B36',
-  primaryColor: '#F01B36',
-  secondaryColor: '#FB7876',
-  imageURL: OPTIMISM_LOGO_URL,
-  blurb: 'Beta',
+export const getNetworkOptions = (network: SupportedNetwork) => {
+  const foundedNetwork = mappedSupportedNetworks.find((item) => item.id === network)
+  if (!foundedNetwork) throw new Error(`not found mapped network for network: "${network}"`)
+  return foundedNetwork
 }
-
-export const PolygonNetworkInfo: NetworkInfo = {
-  id: SupportedNetwork.POLYGON,
-  route: 'polygon',
-  name: 'Polygon',
-  bgColor: '#8247e5',
-  primaryColor: '#8247e5',
-  secondaryColor: '#FB7876',
-  imageURL: POLYGON_LOGO_URL,
-  blurb: '',
-}
-
-export const SUPPORTED_NETWORK_VERSIONS: NetworkInfo[] = [
-  EthereumNetworkInfo,
-  PolygonNetworkInfo,
-  OptimismNetworkInfo,
-  ArbitrumNetworkInfo,
-]

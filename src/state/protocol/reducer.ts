@@ -34,25 +34,7 @@ export interface ProtocolState {
 }
 
 export const initialState: ProtocolState = {
-  [SupportedNetwork.ETHEREUM]: {
-    data: undefined,
-    chartData: undefined,
-    transactions: undefined,
-    lastUpdated: undefined,
-  },
-  [SupportedNetwork.ARBITRUM]: {
-    data: undefined,
-    chartData: undefined,
-    transactions: undefined,
-    lastUpdated: undefined,
-  },
-  [SupportedNetwork.OPTIMISM]: {
-    data: undefined,
-    chartData: undefined,
-    transactions: undefined,
-    lastUpdated: undefined,
-  },
-  [SupportedNetwork.POLYGON]: {
+  [SupportedNetwork.MILKOMEDA]: {
     data: undefined,
     chartData: undefined,
     transactions: undefined,

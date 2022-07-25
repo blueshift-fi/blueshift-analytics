@@ -139,7 +139,7 @@
     "dayjs": "^1.10.4",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
-    "lightweight-charts": "^3.3.0",
+    "lightweight-charts": "^3.8.0",
     "numbro": "^2.3.2",
     "numeral": "^2.0.6",
     "react-hot-keys": "^2.6.2",

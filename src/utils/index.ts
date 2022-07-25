@@ -6,11 +6,10 @@ import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { Currency, CurrencyAmount, Fraction, Percent, Token } from '@uniswap/sdk-core'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
 import { SupportedChainId } from 'constants/chains'
-import { ArbitrumNetworkInfo, NetworkInfo, PolygonNetworkInfo } from 'constants/networks'
+import type { NetworkInfo } from 'constants/networks'
 import JSBI from 'jsbi'
 import { ROUTER_ADDRESS } from '../constants'
 import { TokenAddressMap } from '../state/lists/hooks'
-import { OptimismNetworkInfo } from './../constants/networks'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -37,50 +36,9 @@ export function getEtherscanLink(
   type: 'transaction' | 'token' | 'address' | 'block',
   networkVersion: NetworkInfo
 ): string {
-  const prefix =
-    networkVersion === PolygonNetworkInfo
-      ? 'https://polygonscan.com/'
-      : networkVersion === ArbitrumNetworkInfo
-      ? 'https://arbiscan.io/'
-      : networkVersion === OptimismNetworkInfo
-      ? 'https://optimistic.etherscan.io'
-      : `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
+  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
 
-  if (networkVersion === OptimismNetworkInfo) {
-    switch (type) {
-      case 'transaction': {
-        return `${prefix}/tx/${data}`
-      }
-      case 'token': {
-        return `${prefix}/address/${data}`
-      }
-      case 'block': {
-        return `https://optimistic.etherscan.io`
-      }
-      case 'address':
-      default: {
-        return `${prefix}/address/${data}`
-      }
-    }
-  }
-
-  if (networkVersion === ArbitrumNetworkInfo) {
-    switch (type) {
-      case 'transaction': {
-        return `${prefix}/tx/${data}`
-      }
-      case 'token': {
-        return `${prefix}/address/${data}`
-      }
-      case 'block': {
-        return 'https://arbiscan.io/'
-      }
-      case 'address':
-      default: {
-        return `${prefix}/address/${data}`
-      }
-    }
-  }
+  //TODO утонить
 
   switch (type) {
     case 'transaction': {

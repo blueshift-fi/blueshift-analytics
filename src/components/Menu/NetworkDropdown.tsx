@@ -1,5 +1,5 @@
 import { RowFixed, RowBetween } from 'components/Row'
-import { PolygonNetworkInfo, SUPPORTED_NETWORK_VERSIONS } from 'constants/networks'
+import { mappedSupportedNetworks } from 'constants/networks'
 import useTheme from 'hooks/useTheme'
 import React, { useState, useRef } from 'react'
 import { ChevronDown } from 'react-feather'
@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { StyledInternalLink, TYPE } from 'theme'
 import { useOnClickOutside } from 'hooks/useOnClickOutside'
 import { AutoColumn } from 'components/Column'
-import { EthereumNetworkInfo } from '../../constants/networks'
+import { milkomedaNetworkOptions } from '../../constants/networks'
 
 const Container = styled.div`
   position: relative;
@@ -98,11 +98,12 @@ export default function NetworkDropdown() {
           <TYPE.main fontSize="14px" color={theme.white} ml="8px" mt="-2px" mr="2px" style={{ whiteSpace: 'nowrap' }}>
             {activeNetwork.name}
           </TYPE.main>
-          {activeNetwork === EthereumNetworkInfo || activeNetwork === PolygonNetworkInfo ? null : (
-            <Badge bgColor={activeNetwork.primaryColor} style={{ margin: '0 4px' }}>
-              L2
-            </Badge>
-          )}
+          {/*TODO*/}
+          {/*{activeNetwork === milkomedaNetworkOptions || activeNetwork === PolygonNetworkInfo ? null : (*/}
+          {/*  <Badge bgColor={activeNetwork.primaryColor} style={{ margin: '0 4px' }}>*/}
+          {/*    L2*/}
+          {/*  </Badge>*/}
+          {/*)}*/}
           <ChevronDown size="20px" />
         </RowFixed>
       </Wrapper>
@@ -112,9 +113,9 @@ export default function NetworkDropdown() {
             <TYPE.main color={theme.text3} fontWeight={600} fontSize="16px">
               Select network
             </TYPE.main>
-            {SUPPORTED_NETWORK_VERSIONS.map((n) => {
+            {mappedSupportedNetworks.map((n) => {
               return (
-                <StyledInternalLink key={n.id} to={`${n === EthereumNetworkInfo ? '' : '/' + n.route}/`}>
+                <StyledInternalLink key={n.id} to={`${n === milkomedaNetworkOptions ? '' : '/' + n.route}/`}>
                   <NetworkRow
                     onClick={() => {
                       setShowMenu(false)

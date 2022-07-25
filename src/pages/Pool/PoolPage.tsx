@@ -28,7 +28,7 @@ import DensityChart from 'components/DensityChart'
 import { MonoSpace } from 'components/shared'
 import { useActiveNetworkVersion } from 'state/application/hooks'
 import { networkPrefix } from 'utils/networkPrefix'
-import { ArbitrumNetworkInfo, EthereumNetworkInfo } from 'constants/networks'
+import { milkomedaNetworkOptions } from 'constants/networks'
 import { GenericImageWrapper } from 'components/Logo'
 
 const ContentLayout = styled.div`
@@ -175,7 +175,7 @@ export default function PoolPage({
                   fontSize="24px"
                 >{` ${poolData.token0.symbol} / ${poolData.token1.symbol} `}</TYPE.label>
                 <GreyBadge>{feeTierPercent(poolData.feeTier)}</GreyBadge>
-                {activeNetwork === EthereumNetworkInfo ? null : (
+                {activeNetwork === milkomedaNetworkOptions ? null : (
                   <GenericImageWrapper src={activeNetwork.imageURL} style={{ marginLeft: '8px' }} size={'26px'} />
                 )}
               </RowFixed>
@@ -206,7 +206,7 @@ export default function PoolPage({
                 </StyledInternalLink>
               </ResponsiveRow>
             </AutoColumn>
-            {activeNetwork !== EthereumNetworkInfo ? null : (
+            {activeNetwork !== milkomedaNetworkOptions ? null : (
               <RowFixed>
                 <StyledExternalLink
                   href={`https://app.uniswap.org/#/add/${poolData.token0.address}/${poolData.token1.address}/${poolData.feeTier}`}
@@ -305,15 +305,16 @@ export default function PoolPage({
                   >
                     TVL
                   </ToggleElementFree>
-                  {activeNetwork === ArbitrumNetworkInfo ? null : (
-                    <ToggleElementFree
-                      isActive={view === ChartView.DENSITY}
-                      fontSize="12px"
-                      onClick={() => (view === ChartView.DENSITY ? setView(ChartView.VOL) : setView(ChartView.DENSITY))}
-                    >
-                      Liquidity
-                    </ToggleElementFree>
-                  )}
+                  {/*TODO*/}
+                  {/*{activeNetwork === ArbitrumNetworkInfo ? null : (*/}
+                  {/*  <ToggleElementFree*/}
+                  {/*    isActive={view === ChartView.DENSITY}*/}
+                  {/*    fontSize="12px"*/}
+                  {/*    onClick={() => (view === ChartView.DENSITY ? setView(ChartView.VOL) : setView(ChartView.DENSITY))}*/}
+                  {/*  >*/}
+                  {/*    Liquidity*/}
+                  {/*  </ToggleElementFree>*/}
+                  {/*)}*/}
                   <ToggleElementFree
                     isActive={view === ChartView.FEES}
                     fontSize="12px"

@@ -1,7 +1,7 @@
-import { EthereumNetworkInfo, NetworkInfo } from 'constants/networks'
+import { milkomedaNetworkOptions, NetworkInfo } from 'constants/networks'
 
 export function networkPrefix(activeNewtork: NetworkInfo) {
-  const isEthereum = activeNewtork === EthereumNetworkInfo
+  const isEthereum = activeNewtork === milkomedaNetworkOptions
   if (isEthereum) {
     return '/'
   }

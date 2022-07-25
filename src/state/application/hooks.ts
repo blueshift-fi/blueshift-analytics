@@ -1,15 +1,5 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
-import {
-  arbitrumBlockClient,
-  arbitrumClient,
-  blockClient,
-  client,
-  optimismClient,
-  optimismBlockClient,
-  polygonBlockClient,
-  polygonClient,
-} from 'apollo/client'
-import { NetworkInfo, SupportedNetwork } from 'constants/networks'
+import { getNetworkOptions, NetworkInfo } from 'constants/networks'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useActiveWeb3React } from '../../hooks'
@@ -125,35 +115,13 @@ export function useActiveNetworkVersion(): [NetworkInfo, (activeNetworkVersion: 
 // get the apollo client related to the active network
 export function useDataClient(): ApolloClient<NormalizedCacheObject> {
   const [activeNetwork] = useActiveNetworkVersion()
-  switch (activeNetwork.id) {
-    case SupportedNetwork.ETHEREUM:
-      return client
-    case SupportedNetwork.ARBITRUM:
-      return arbitrumClient
-    case SupportedNetwork.OPTIMISM:
-      return optimismClient
-    case SupportedNetwork.POLYGON:
-      return polygonClient
-    default:
-      return client
-  }
+  return getNetworkOptions(activeNetwork.id).client
 }
 
 // get the apollo client related to the active network for fetching blocks
 export function useBlockClient(): ApolloClient<NormalizedCacheObject> {
   const [activeNetwork] = useActiveNetworkVersion()
-  switch (activeNetwork.id) {
-    case SupportedNetwork.ETHEREUM:
-      return blockClient
-    case SupportedNetwork.ARBITRUM:
-      return arbitrumBlockClient
-    case SupportedNetwork.OPTIMISM:
-      return optimismBlockClient
-    case SupportedNetwork.POLYGON:
-      return polygonBlockClient
-    default:
-      return blockClient
-  }
+  return getNetworkOptions(activeNetwork.id).blockClient
 }
 
 // Get all required subgraph clients
