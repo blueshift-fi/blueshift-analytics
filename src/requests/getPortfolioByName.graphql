@@ -1,0 +1,24 @@
+query getPortfolio($name: String) {
+  portfolios(first: 50, orderBy: name, orderDirection: desc, where:{name: $name}) {
+    id
+    name
+    lpTokenAddress
+    tvlUSD
+    addressId
+    lpToken {
+      priceUSD
+    }
+    baseToken {
+      name
+      id
+      amount
+    }
+    tokens {
+      name
+      id
+      amount
+
+    }
+    fees30dUSD
+  }
+}

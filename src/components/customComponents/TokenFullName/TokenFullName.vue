@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="row items-center no-wrap"
-    :to="{ name: RouterNames.DAO_PAGE, params: { id: name } }"
+    :to="{ name: RouterNames.TOKEN_PAGE, params: { id: name } }"
   >
     <TokenIcon :source="logo" :size="logoSize" />
     <div class="q-ml-2">

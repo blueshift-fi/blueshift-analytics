@@ -1,0 +1,13 @@
+query getTopPortfolios {
+  portfolios(first: 50, orderBy: name, orderDirection: desc) {
+    id
+    tvlUSD
+    name
+    lpToken {
+      priceUSD
+    }
+    tokens {
+      name
+    }
+  }
+}

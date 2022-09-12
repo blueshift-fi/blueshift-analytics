@@ -1,4 +1,6 @@
-import { ChartInterval } from '@/services/mainStatisticsHttpService';
+export enum ChartInterval {
+  HOURS_1,
+}
 
 export enum TimePeriods {
   DAYS_1 = '1D',
@@ -34,35 +36,35 @@ export const getMappedPeriodsTime = (): PeriodItem[] => [
     isShort: true
   },
   {
-    interval: ChartInterval.HOURS_24,
+    interval: ChartInterval.HOURS_1,
     key: TimePeriods.MONTHS_1,
     timeAgo: 28 * 24 * 60 * 60 * 1000,
     format: 'DD MMM (HH:mm)',
     isShort: true
   },
   {
-    interval: ChartInterval.HOURS_24,
+    interval: ChartInterval.HOURS_1,
     key: TimePeriods.MONTHS_3,
     timeAgo: 3 * 28 * 24 * 60 * 60 * 1000,
     format: 'DD MMM (HH:mm)',
     isShort: false
   },
   {
-    interval: ChartInterval.HOURS_24,
+    interval: ChartInterval.HOURS_1,
     key: TimePeriods.MONTHS_6,
     timeAgo: 6 * 28 * 24 * 60 * 60 * 1000,
     format: 'DD MMM (HH:mm)',
     isShort: false
   },
   {
-    interval: ChartInterval.HOURS_24,
+    interval: ChartInterval.HOURS_1,
     key: TimePeriods.YEARS_1,
     timeAgo: 365 * 24 * 60 * 60 * 1000,
     format: 'DD MMM (HH:mm)',
     isShort: false
   },
   {
-    interval: ChartInterval.WEEK_1,
+    interval: ChartInterval.HOURS_1,
     key: TimePeriods.ALL,
     timeAgo: 0,
     format: 'DD MMM YYYY (HH:mm)',

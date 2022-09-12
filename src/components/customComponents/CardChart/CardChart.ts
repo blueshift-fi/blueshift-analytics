@@ -9,10 +9,9 @@ export default defineComponent({
   components: { IconControl },
 
   props: {
-    title: String,
     hasTypeController: {
       type: Boolean,
-      default: false
+      default: true
     },
     notScalable: {
       type: Boolean,
@@ -32,7 +31,7 @@ export default defineComponent({
       if ($q.screen.lt.md || props.notScalable) {
         return 'card-expanded col-12';
       }
-      return expanded.value ? 'card-expanded col-12 order-first' : 'card-collapsed col-6';
+      return expanded.value ? 'card-expanded col-12 order-first' : 'card-collapsed col-12';
     };
 
     return {

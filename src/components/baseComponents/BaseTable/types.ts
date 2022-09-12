@@ -1,19 +1,22 @@
-import { DaoItem } from '@/store/modules/dao/types';
-
 export type TableColumn = {
   name: string,
   label: string,
   field?: any,
   align?: string,
-  sortable: boolean,
+  sortable?: boolean,
   style?: string,
   required?: boolean,
   sort?: any,
-  filterFunction?: (...args: any[]) => DaoItem[],
+  filterFunction?: (...args: any[]) => any[],
   isDate?: boolean,
   filedToData?: string[],
   addFieldToData?: string[],
   tooltip?: string
+  hidden?: {
+    xs?: boolean
+    sm?: boolean
+    md?: boolean
+  }
 };
 
 export type Paginator = {

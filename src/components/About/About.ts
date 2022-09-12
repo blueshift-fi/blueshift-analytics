@@ -1,5 +1,4 @@
 import { defineComponent } from 'vue';
-import { about } from '@/app.options/constant';
 import { Screen } from 'quasar';
 
 export default defineComponent({
@@ -7,7 +6,6 @@ export default defineComponent({
 
   setup() {
     return {
-      about,
       Screen,
     };
   },

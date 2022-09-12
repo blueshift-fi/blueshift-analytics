@@ -1,0 +1,17 @@
+overwrite: true
+schema: "./schema.graphql"
+documents: "src/requests/*.graphql"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-vue-apollo"
+    config:
+      withCompositionFunctions: true
+      vueCompositionApiImportFrom: vue
+      scalars:
+        Long: number
+        LocalDateTime: string
+        BigDecimal: number
+        BigInt: number

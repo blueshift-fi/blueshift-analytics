@@ -1,0 +1,452 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+}
+
+type Block {
+  hash: String
+  id: ID
+  number: BigInt
+}
+
+"withdraw liquidity"
+type Burn {
+  addressId: String
+  amount: BigDecimal
+  amountUSD: BigDecimal
+  dateTime: LocalDateTime
+  id: ID
+  origin: String
+  owner: String
+  portfolio: Portfolio
+  timestamp: Long
+  token: Token
+  transaction: Transaction
+}
+
+type ChainIndexingStatus {
+  chainHeadBlock: Block
+  id: ID
+  latestBlock: Block
+  network: String
+}
+
+"crypto transaction"
+type Explorer {
+  addressId: String
+  blockNumber: Long
+  dateTime: LocalDateTime
+  deposits: [Mint]
+  gasPrice: Long
+  gasUsed: Long
+  id: ID
+  rawInput: String
+  swaps: [Swap]
+  timestamp: Long
+  withdraws: [Burn]
+}
+
+type Factory {
+  dateTime: LocalDateTime
+  id: ID
+  interval: IntervalType
+  totalFeesUSD: BigDecimal
+  totalValueLockedUSD: BigDecimal
+  totalVolumeUSD: BigDecimal
+  txCount: Long
+}
+
+type Health {
+  chains: ChainIndexingStatus
+  health: HealthType
+  id: ID
+  synced: Boolean
+}
+
+"deposit liquidity"
+type Mint {
+  addressId: String
+  amount: BigDecimal
+  amountUSD: BigDecimal
+  dateTime: LocalDateTime
+  id: ID
+  origin: String
+  owner: String
+  portfolio: Portfolio
+  sender: String
+  timestamp: Long
+  token: Token
+  transaction: Transaction
+}
+
+type Pair {
+  addressId: ID
+  createdAtBlockNumber: Long
+  createdAtTimestamp: Long
+  liquidityProviderCount: Long
+  reserve0: BigDecimal
+  reserve1: BigDecimal
+  reserveETH: BigDecimal
+  reserveUSD: BigDecimal
+  token0: Token
+  token0Price: BigDecimal
+  token1: Token
+  token1Price: BigDecimal
+  totalSupply: BigDecimal
+  trackedReserveETH: BigDecimal
+  txCount: Long
+  untrackedVolumeUSD: BigDecimal
+  volumeToken0: BigDecimal
+  volumeToken1: BigDecimal
+  volumeUSD: BigDecimal
+}
+
+type Portfolio {
+  addressId: String
+  baseToken: Token
+  baseTokenAddress: String
+  fees24hETH: BigDecimal
+  fees24hUSD: BigDecimal
+  fees30dUSD: BigDecimal
+  id: ID
+  lpToken: Token
+  lpTokenAddress: String
+  lpTokenPrice: BigDecimal
+  lpTokenPriceUSD: BigDecimal
+  name: String
+  tokens: [Token]
+  tvlBase: BigDecimal
+  tvlUSD: BigDecimal
+  tvlUSD24hChange: BigDecimal
+  txCount: BigDecimal
+  volume24hBase: BigDecimal
+  volume24hETH: BigDecimal
+  volume24hUSD: BigDecimal
+  volume30d: BigDecimal
+  volume30dUSD: BigDecimal
+  volumeUSD24hChange: BigDecimal
+}
+
+type PortfolioIntervalDataDto {
+  dateTime: LocalDateTime
+  fees24hUSD: BigDecimal
+  fees30dUSD: BigDecimal
+  fees7dUSD: BigDecimal
+  id: ID
+  interval: IntervalType
+  portfolio: Portfolio
+  portfolioAddress: String
+  tvlBase: BigDecimal
+  tvlUSD: BigDecimal
+  tvl_d: BigDecimal
+  volume24h: BigDecimal
+  volume24hUSD: BigDecimal
+  volume24h_d: BigDecimal
+  volume30d: BigDecimal
+  volume30dUSD: BigDecimal
+  volume30d_d: BigDecimal
+  volume7d: BigDecimal
+  volume7dUSD: BigDecimal
+  volume7d_d: BigDecimal
+}
+
+type PriceEth {
+  dateTime: LocalDateTime
+  ethPriceUSD: BigDecimal
+  id: ID
+}
+
+"Query root"
+type Query {
+  "aka pricesETH. Get price of ETH (currently ADA)"
+  bundles(first: Int = 50, orderBy: Bundle_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Bundle_filter): [PriceEth]
+  "get mints"
+  burns(first: Int = 50, orderBy: Burn_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Burn_filter): [Transaction]
+  "get summary statistic data"
+  factories(first: Int = 50, orderBy: Factory_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Factory_filter): [Factory]
+  "get current server status and sync state"
+  health: [Health]
+  "get mints"
+  mints(first: Int = 50, orderBy: Mint_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Mint_filter): [Mint]
+  "get a pair"
+  pair(title: String): Pair
+  "get all pair"
+  pairs(first: Int = 50, orderBy: Pair_orderBy, orderDirection: OrderDirection, skip: Int = 0, where: Pair_filter): [Pair]
+  "Get statistic for portfolio"
+  portfolioIntervalDatas(first: Int = 50, orderBy: PortfolioIntervalData_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: PortfolioIntervalData_filter): [PortfolioIntervalDataDto]
+  "get all portfolios"
+  portfolios(first: Int = 50, orderBy: Portfolio_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Portfolio_filter): [Portfolio]
+  "get swaps"
+  swaps(first: Int = 50, orderBy: Swap_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Swap_filter): [Swap]
+  "Get statistic for token"
+  tokenIntervalDatas(first: Int = 50, orderBy: TokenIntervalData_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: TokenIntervalData_filter): [TokenIntervalData]
+  "get all tokens"
+  tokens(first: Int = 50, orderBy: Token_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Token_filter): [Token]
+  "get transactions"
+  transactionEntries(first: Int = 50, orderBy: Transaction_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Transaction_filter): [Transaction]
+  "get all explorer transactions"
+  transactions(first: Int = 50, orderBy: Transaction_orderBy, orderDirection: OrderDirection, skip: Int = 0, subgraphError: Boolean = false, where: Transaction_filter): [Explorer]
+}
+
+"swap tokens"
+type Swap {
+  addressId: String
+  amount0: BigDecimal
+  amount1: BigDecimal
+  amountUSD: BigDecimal
+  dateTime: LocalDateTime
+  id: ID
+  origin: String
+  portfolio: Portfolio
+  recipient: String
+  sender: String
+  timestamp: Long
+  token0: Token
+  token1: Token
+  transaction: Transaction
+}
+
+type Token {
+  addressId: String
+  amount: BigDecimal
+  decimals: Long
+  depositEMAPrice: BigDecimal
+  depositLimit: BigDecimal
+  fees24hETH: BigDecimal
+  fees24hUSD: BigDecimal
+  fees30dUSD: BigDecimal
+  id: ID
+  name: String
+  portfolioShare: BigDecimal
+  portfolios: [Portfolio]
+  priceBase: BigDecimal
+  priceETH: BigDecimal
+  priceUSD: BigDecimal
+  symbol: String!
+  targetWeight: BigDecimal
+  totalSupply: BigDecimal
+  tvlETH: BigDecimal
+  tvlUSD: BigDecimal
+  tvlUSD24hChange: BigDecimal
+  volume24hETH: BigDecimal
+  volume24hUSD: BigDecimal
+  volume30dUSD: BigDecimal
+  volumeUSD24hChange: BigDecimal
+  volumeUSD7dChange: BigDecimal
+  withdrawEMAPrice: BigDecimal
+  withdrawLimit: BigDecimal
+}
+
+type TokenIntervalData {
+  close: BigDecimal
+  dateTime: LocalDateTime
+  high: BigDecimal
+  id: ID
+  interval: IntervalType
+  low: BigDecimal
+  open: BigDecimal
+  token: Token
+  tokenAddress: String
+}
+
+"crypto transaction"
+type Transaction {
+  addressId: String
+  blockNumber: Long
+  dateTime: LocalDateTime
+  deposits: [Mint]
+  gasPrice: Long
+  gasUsed: Long
+  id: ID
+  rawInput: String
+  swaps: [Swap]
+  timestamp: Long
+  withdraws: [Burn]
+}
+
+enum Bundle_orderBy {
+  dateTime
+  ethPriceUSD
+}
+
+enum Burn_orderBy {
+  dateTime
+  timestamp
+}
+
+enum Factory_orderBy {
+  dateTime
+  totalValueLockedUSD
+  totalVolumeUSD
+}
+
+enum HealthType {
+  failed
+  healthy
+  unhealthy
+}
+
+enum IntervalType {
+  DAYS_30
+  DAYS_7
+  HOURS_1
+  HOURS_24
+  MINUTES_10
+  MONTHS_12
+  MONTHS_3
+  MONTHS_6
+}
+
+enum Mint_orderBy {
+  dateTime
+  timestamp
+}
+
+enum OrderDirection {
+  asc
+  desc
+}
+
+enum Pair_orderBy {
+  createdAtBlockNumber
+  createdAtTimestamp
+  id
+  liquidityProviderCount
+  reserve0
+  reserve1
+  reserveETH
+  reserveUSD
+  token0
+  token0Price
+  token1
+  token1Price
+  totalSupply
+  trackedReserveETH
+  txCount
+  untrackedVolumeUSD
+  volumeToken0
+  volumeToken1
+  volumeUSD
+}
+
+enum PortfolioIntervalData_orderBy {
+  dateTime
+  feesUSD
+  portfolioAddress
+  tvlUSD
+  volumeUSD
+}
+
+enum Portfolio_orderBy {
+  addressId
+  id
+  name
+  totalValueLockedUSD
+}
+
+enum Swap_orderBy {
+  dateTime
+  timestamp
+}
+
+enum TokenIntervalData_orderBy {
+  dateTime
+  tokenAddress
+}
+
+enum Token_orderBy {
+  id
+  name
+  symbol
+  totalValueLockedUSD
+}
+
+enum Transaction_orderBy {
+  dateTime
+  timestamp
+}
+
+"Built-in java.math.BigDecimal"
+scalar BigDecimal
+
+"BigInt for number"
+scalar BigInt
+
+"Built-in scalar representing a local date-time"
+scalar LocalDateTime
+
+"Long type"
+scalar Long
+
+"Use SPQR's SchemaPrinter to remove this from SDL"
+scalar UNREPRESENTABLE
+
+input Bundle_filter {
+  dateTime: LocalDateTime
+  dateTime_gt: LocalDateTime
+  dateTime_gte: LocalDateTime
+  dateTime_lt: LocalDateTime
+  dateTime_lte: LocalDateTime
+}
+
+input Burn_filter {
+  portfolioAddress: String
+  tokenAddress: String
+}
+
+input Factory_filter {
+  dateTime: LocalDateTime
+  dateTime_gt: LocalDateTime
+  interval: IntervalType
+}
+
+input Mint_filter {
+  portfolioAddress: String
+  tokenAddress: String
+}
+
+input Pair_filter {
+  addressId: String
+  addressId_not: String
+}
+
+input PortfolioIntervalData_filter {
+  dateTime_gt: LocalDateTime
+  dateTime_lt: LocalDateTime
+  interval: IntervalType
+  portfolioAddress: String
+}
+
+input Portfolio_filter {
+  addressId: String
+  addressId_in: [String]
+  addressId_not: String
+  name: String
+  tokenAddress_in: [String]
+}
+
+input Swap_filter {
+  portfolioAddress: String
+  token0Address: String
+  token1Address: String
+}
+
+input TokenIntervalData_filter {
+  dateTime_gt: LocalDateTime
+  interval: IntervalType
+  tokenAddress: String
+}
+
+input Token_filter {
+  addressId: String
+  addressId_in: [String]
+  addressId_not: String
+  symbol_contains: String
+}
+
+input Transaction_filter {
+  addressId: String
+  dateTime_gte: LocalDateTime
+  timestamp_gte: Long
+}

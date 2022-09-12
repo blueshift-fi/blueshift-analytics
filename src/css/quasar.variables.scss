@@ -38,11 +38,13 @@
   --negative-gradient: linear-gradient(270deg, #A93782 0.04%, #D34C64 100.23%);
   --q-warning: #{$warning};
 
-  --q-dark: #17151c;
+  //--q-dark: #17151c;
+  --q-dark: #171C3A;
   --q-dark1: #1c1a21;
   --q-dark2: #1e1c24;
   --q-dark3: #232128;
-  --q-dark4: #25222E;
+  //--q-dark4: #25222E;
+  --q-dark4:  #2A2F56;
   --q-dark5: #2A2732;
 
   --q-dark-page: linear-gradient(180deg, #120f15 0%, #110f13 100%);
@@ -54,6 +56,7 @@
   --q-light-3: #{scale-color($light, $alpha: -97%)};
 
   --gray: #5f5c6f;
+  --grey-5: red;
   --gray-light: #9791a7;
   --gray-dark: #3f3d45;
   --text-color: #ffffff;
@@ -86,7 +89,7 @@
   --body-background-image-top: url("data:image/svg+xml,%3Csvg width='1920' height='1206' viewBox='0 0 1920 1206' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg filter='url(%23filter0_f_431_66331)'%3E%3Ccircle cx='959.869' cy='49.8696' r='556' transform='rotate(-33.2655 959.869 49.8696)' fill='url(%23paint0_linear_431_66331)' fill-opacity='0.15'/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='filter0_f_431_66331' x='-196.193' y='-1106.19' width='2312.13' height='2312.13' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='300' result='effect1_foregroundBlur_431_66331'/%3E%3C/filter%3E%3ClinearGradient id='paint0_linear_431_66331' x1='959.869' y1='-506.13' x2='959.869' y2='605.87' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%230014C7'/%3E%3Cstop offset='1' stop-color='%232965FF'/%3E%3Cstop offset='1' stop-color='%236993FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A");
   --body-background-image-bottom: url("data:image/svg+xml,%3Csvg width='1920' height='1075' viewBox='0 0 1920 1075' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.4' filter='url(%23filter0_f_431_64975)'%3E%3Cellipse cx='960' cy='1156' rx='708' ry='556' fill='url(%23paint0_linear_431_64975)'/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='filter0_f_431_64975' x='-348' y='0' width='2616' height='2312' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='300' result='effect1_foregroundBlur_431_64975'/%3E%3C/filter%3E%3ClinearGradient id='paint0_linear_431_64975' x1='960' y1='600' x2='960' y2='1712' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23BD00FF' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23600B95'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A");
 
-  --header-border-color: #{scale-color($light, $alpha: -85%)};
+  --header-background-color: rgba(0, 7, 26, .2);
 }
 
 $primary: var(--q-primary);
@@ -184,10 +187,10 @@ $toggle-height: 1.5rem;
 
 // Breakpoints
 
-$breakpoint-xs: 767px;
-$breakpoint-sm: 1365px;
-$breakpoint-md: 1599px;
-$breakpoint-lg: 1919px;
+//$breakpoint-xs: 767px;
+//$breakpoint-sm: 1365px;
+//$breakpoint-md: 1599px;
+//$breakpoint-lg: 1919px;
 
 // Space
 
@@ -277,7 +280,7 @@ $input-autofill-color           : $text-muted;
 $table-border-radius            : $border-radius;
 $table-box-shadow               : $shadow-glass;
 $table-bg                       : var(--q-dark);
-$table-border                   : 1px solid var(--q-dark3);
+$table-border                   : 1px solid var(--q-dark4);
 $table-selected-bg              : var(--q-dark2);
 $table-dark-border-color        : var(--q-dark4);
 $table-dark-hover-background    : transparent;
@@ -300,7 +303,7 @@ $toggle-checked-color: var(--q-light);
 // Cards
 
 $card-bg: var(--q-light-3);
-$card-border: 1px solid var(--q-light-5);
+$card-border: 1px solid var(--q-dark4);
 $card-shadow: $shadow-glass;
 
 // Tags
@@ -321,3 +324,14 @@ $share-secondary-text-color: var(--q-secondary);
 
 $date-header-bg: var(--q-dark4);
 $weekliday-color: var(--gray);
+
+
+// Colors
+//TODO
+$grey-7: rgba(146, 169, 210, 1);
+
+$grey-10: #00071A;
+
+$cyan-14: rgba(125, 138, 255, 0.1);
+
+$separator-dark-color: var(--q-dark4);

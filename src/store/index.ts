@@ -8,9 +8,10 @@ import { mutations } from '@/store/mutations';
 import { actions } from '@/store/actions';
 import { ModulesNames } from '@/store/names/modules.names';
 import { getters } from '@/store/getters';
-import { dao } from '@/store/modules/dao';
-import { mainStatistics } from '@/store/modules/mainStatistics';
-import { news } from '@/store/modules/news';
+import { tokens } from '@/store/modules/tokens';
+import { transactions } from '@/store/modules/transactions';
+import { portfolios } from '@/store/modules/portfolios';
+
 
 /*
  * If not building with SSR mode, you can
@@ -42,9 +43,9 @@ export default store(function(/* { ssrContext } */) {
     actions,
     getters,
     modules: {
-      [ModulesNames.DAO]: dao,
-      [ModulesNames.MAIN_STATISTICS]: mainStatistics,
-      [ModulesNames.NEWS]: news
+      [ModulesNames.TOKENS]: tokens,
+      [ModulesNames.TRANSACTIONS]: transactions,
+      [ModulesNames.PORTFOLIOS]: portfolios
     },
 
     // enable strict mode (adds overhead!)

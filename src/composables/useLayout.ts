@@ -1,5 +1,4 @@
 import { ref } from 'vue';
-import { SocialProfile, SocialProfilesList } from '@/store/modules/dao/types';
 
 const chartViewDif = ref(false);
 
@@ -29,21 +28,21 @@ export function useLayout() {
     void navigator.clipboard.writeText(data);
   };
 
-  const getSocialLinksByName = (arr: SocialProfile[]) => {
-    return arr.filter((item) => {
-      return (
-        item.socialType === SocialProfilesList.TWITTER ||
-        item.socialType === SocialProfilesList.TELEGRAM ||
-        item.socialType === SocialProfilesList.REDDIT ||
-        item.socialType === SocialProfilesList.DISCORD ||
-        item.socialType === SocialProfilesList.YOUTUBE
-      );
-    });
-  };
-
-  const getLinkByName = (arr: SocialProfile[], name: SocialProfilesList) => {
-    return arr.find((item) => item.socialType === name);
-  };
+  // const getSocialLinksByName = (arr: SocialProfile[]) => {
+  //   return arr.filter((item) => {
+  //     return (
+  //       item.socialType === SocialProfilesList.TWITTER ||
+  //       item.socialType === SocialProfilesList.TELEGRAM ||
+  //       item.socialType === SocialProfilesList.REDDIT ||
+  //       item.socialType === SocialProfilesList.DISCORD ||
+  //       item.socialType === SocialProfilesList.YOUTUBE
+  //     );
+  //   });
+  // };
+  //
+  // const getLinkByName = (arr: SocialProfile[], name: SocialProfilesList) => {
+  //   return arr.find((item) => item.socialType === name);
+  // };
 
   const getLabelPercent = (value: number) => {
     return value < 0 ? `${value}%` : `+${value}%`;
@@ -91,8 +90,8 @@ export function useLayout() {
     getLabelLink,
     ellipsisText,
     copyToClipboard,
-    getSocialLinksByName,
-    getLinkByName,
+    // getSocialLinksByName,
+    // getLinkByName,
     getLabelPercent,
     setDraggableX,
   };

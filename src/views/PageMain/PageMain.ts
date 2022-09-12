@@ -1,93 +1,54 @@
-import { computed, defineComponent, onMounted, ref, watch, onBeforeMount } from 'vue';
-import DaoTable from '@/components/DaoTable/DaoTable.vue';
-import { useStore } from '@/store';
-import DaoTableFiltersForm from '@/components/forms/DaoTableFiltersForm/DaoTableFiltersForm.vue';
-import SectionTitle from '@/components/customComponents/SectionTitle/SectionTitle.vue';
-import Chart from '@/components/Chart/Chart.vue';
-import BaseToggle from '@/components/baseComponents/BaseToggle/BaseToggle.vue';
-import { useQuasar } from 'quasar';
-import { useLayout } from '@/composables/useLayout';
-import WeeklyListPair from '@/components/customComponents/WeeklyListPair/WeeklyListPair.vue';
-import { localStorageSaveService } from '@/services/localStorageSaveService';
-import { isVisibleMainStatistic } from '@/views/PageMain/constants';
-import { DaoGettersType } from '@/store/modules/dao/names/getters.names';
-import { StatisticType } from '@/app.options/statisticsOption';
-import { DaoItem } from '@/store/modules/dao/types';
-import { DaoActionsType } from '@/store/modules/dao/names/actions.names';
+import { computed, defineComponent, onMounted } from 'vue';
 import { ModulesNames } from '@/store/names/modules.names';
-import About from '@/components/About/About.vue';
-import { ChartUniqNames } from '@/app.options/chartsOptions';
-import { NewsActionsType } from '@/store/modules/news/names/actions.names';
-import { NewsItem } from '@/store/modules/news/types';
-import { NewsGettersType } from '@/store/modules/news/names/getters.names';
-import NewsList from '@/components/NewsList/NewsList.vue';
-import BaseButton from '@/components/baseComponents/BaseButton/BaseButton.vue';
-import { getDate } from '@/utils/getDate';
-import { Screen } from 'quasar';
-import { RouterNames } from '@/router/router.names';
-import { MainStatisticsGettersType } from '@/store/modules/mainStatistics/names/getters.names';
+import { TokensGettersNames } from '@/store/modules/tokens/names/getters.names';
+import type { Portfolio, Token } from '@/generated/graphql';
+import { useStore } from '@/store';
+import { TokensActionsNames } from '@/store/modules/tokens/names/actions.names';
+import TokensTable from '@/components/TokensTable/TokensTable.vue';
+import { TransactionsActionsNames } from '@/store/modules/transactions/names/actions.names';
+import { TransactionsGettersNames } from '@/store/modules/transactions/names/getters.names';
+import TransactionsTable from '@/components/TransactionsTable/TransactionsTable.vue';
+import PortfoliosTable from '@/components/PortfoliosTable/PortfoliosTable.vue';
+import { PortfoliosGettersNames } from '@/store/modules/portfolios/names/getters.names';
+import { PortfoliosActionsNames } from '@/store/modules/portfolios/names/actions.names';
+import Chart from '@/components/PortfolioChart/PortfolioChart.vue';
 
 export default defineComponent({
   name: 'PageMain',
 
   components: {
-    DaoTable,
-    DaoTableFiltersForm,
-    SectionTitle,
-    Chart,
-    BaseToggle,
-    WeeklyListPair,
-    About,
-    NewsList,
-    BaseButton
+    TokensTable,
+    TransactionsTable,
+    PortfoliosTable,
+    Chart
   },
 
   setup() {
     const { dispatch, getters } = useStore();
-    const $q = useQuasar();
-    const { chartViewDif } = useLayout();
-    const { save, load } = localStorageSaveService();
 
-    const daoList = computed(() => <DaoItem[]>getters[`${ModulesNames.DAO}/${DaoGettersType.GET_LIST}`]);
-    const news = computed(() => <NewsItem[]>getters[`${ModulesNames.NEWS}/${NewsGettersType.GET_MAIN_NEWS}`]);
-    const lastUpdatedNews = computed(() => <string>getters[`${ModulesNames.NEWS}/${NewsGettersType.GET_LAST_UPDATED_MAIN_NEWS}`]);
-    const lastUpdatedStat = computed(() => <string>getters[`${ModulesNames.MAIN_STATISTICS}/${MainStatisticsGettersType.GET_LAST_UPDATED_STAT}`]);
-    const lastUpdatedDaoList = computed(() => <string>getters[`${ModulesNames.MAIN_STATISTICS}/${DaoGettersType.GET_LAST_UPDATED_LIST}`]);
+    const isLoadingTopTokens = computed(() => <boolean>getters[`${ModulesNames.TOKENS}/${TokensGettersNames.GET_LOADING_TOP_TOKENS}`]);
+    const topTokens = computed(() => <Token[]>getters[`${ModulesNames.TOKENS}/${TokensGettersNames.GET_TOP_TOKENS}`]);
 
-    const isVisibleStatistic = ref($q.screen.gt.xs);
-    watch(() => isVisibleStatistic.value, () => {
-      save(isVisibleStatistic.value, isVisibleMainStatistic);
-    });
+    const isLoadingTopTransactions = computed(() => <boolean>getters[`${ModulesNames.TRANSACTIONS}/${TransactionsGettersNames.GET_LOADING_TOP_TRANSACTIONS}`]);
+    const topTransactions = computed(() => <Token[]>getters[`${ModulesNames.TRANSACTIONS}/${TransactionsGettersNames.GET_TOP_TRANSACTIONS}`]);
 
-    onBeforeMount(() => {
-      const isVisible = <boolean>load(isVisibleMainStatistic);
-      if(isVisible !== undefined) {
-        isVisibleStatistic.value = isVisible;
-      }
-    });
+    const isLoadingTopPortfolios = computed(() => <boolean>getters[`${ModulesNames.PORTFOLIOS}/${PortfoliosGettersNames.GET_LOADING_TOP_PORTFOLIOS}`]);
+    const topPortfolios = computed(() => <Portfolio[]>getters[`${ModulesNames.PORTFOLIOS}/${PortfoliosGettersNames.GET_TOP_PORTFOLIOS}`]);
 
     onMounted(() => {
-      try {
-        if(!daoList.value.length) void dispatch(`${ModulesNames.DAO}/${DaoActionsType.FETCH_DAO_LIST}`);
-        void dispatch(`${ModulesNames.NEWS}/${NewsActionsType.FETCH_MAIN_NEWS}`);
-      } catch (e) {
-        console.error(e);
-      }
+      void dispatch(`${ModulesNames.TOKENS}/${TokensActionsNames.FETCH_TOP_TOKENS}`);
+      void dispatch(`${ModulesNames.TRANSACTIONS}/${TransactionsActionsNames.FETCH_TOP_TRANSACTIONS}`);
+      void dispatch(`${ModulesNames.PORTFOLIOS}/${PortfoliosActionsNames.FETCH_TOP_PORTFOLIOS}`);
     });
 
     return {
-      lastUpdatedDaoList,
-      lastUpdatedStat,
-      news,
-      lastUpdatedNews,
-      isVisibleStatistic,
-      RouterNames,
-      daoList,
-      chartViewDif,
-      ChartUniqNames,
-      StatisticType,
-      Screen,
-      getDate,
+      data: [{ time: 9999999, value: 167 }, { time: 99994999, value: 169 }, { time: 99999999, value: 142 }],
+      isLoadingTopTokens,
+      topTokens,
+      isLoadingTopTransactions,
+      topTransactions,
+      isLoadingTopPortfolios,
+      topPortfolios
     };
   }
 });

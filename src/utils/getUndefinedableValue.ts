@@ -5,3 +5,5 @@ export const getUndefinedableValue = (data?: number): number | undefined => {
     return data;
   }
 };
+
+export type Nullable = undefined | null;

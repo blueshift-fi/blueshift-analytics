@@ -9,14 +9,14 @@ export const chartOptions: DeepPartial<ChartOptions> = {
   },
   crosshair: {
     horzLine: {
-      visible: false,
+      // visible: false,
       labelVisible: false,
     },
     vertLine: {
       labelVisible: false,
-      width: ChartSizes.LINE_WIDTH,
-      color: ChartColors.BLUE_MAIN,
-      style: LineStyle.Solid,
+      // width: ChartSizes.LINE_WIDTH,
+      // color: ChartColors.BLUE_MAIN,
+      // style: LineStyle.Solid,
     },
   },
   grid: {

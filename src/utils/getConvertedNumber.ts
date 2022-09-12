@@ -1,8 +1,9 @@
 import { defaultFractionDigits } from '@/app.options/constant';
 import { isNotData } from '@/utils/getDataForCell';
+import { Nullable } from '@/utils/getUndefinedableValue';
 
 export type ConvertedOptions = {
-  number: number | null;
+  number: number | Nullable;
   currency?: string;
   fractionDigits?: number;
   style?: 'decimal' | 'currency' | 'percent';

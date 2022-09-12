@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <SocialNetworks class="q-mt-8 q-mt-md-none" />
+<!--    <SocialNetworks class="q-mt-8 q-mt-md-none" />-->
     <Copyright />
   </footer>
 </template>

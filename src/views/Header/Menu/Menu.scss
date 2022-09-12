@@ -1,0 +1,28 @@
+.ui-menu {
+  list-style: none;
+  padding: 0;
+
+  a {
+    display: block;
+  }
+
+  .active-page {
+    position: relative;
+
+    .item-name {
+      color: orange;
+
+      &::before {
+        content: '';
+        display: block;
+        bottom: 2px;
+        left: calc(50% - 2px);
+        position: absolute;
+        height: 4px;
+        width: 4px;
+        background: orange;
+        border-radius: 100%;
+      }
+    }
+  }
+}

@@ -34,5 +34,7 @@ export default route<RootState>(function(/* { store, s0srContext } */) {
     history: createHistory(
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     ),
+    linkActiveClass: 'active-page',
+    linkExactActiveClass: 'active-page',
   });
 });

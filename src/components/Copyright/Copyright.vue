@@ -1,6 +1,6 @@
 <template>
   <div class="text-center text-muted copyright">
-    © {{ new Date().getFullYear() }} DAO Pulse. All rights reserved.
+    © Blueshift {{ new Date().getFullYear() }}. All rights reserved.
   </div>
 </template>
 

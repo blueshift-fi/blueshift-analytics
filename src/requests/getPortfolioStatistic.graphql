@@ -1,0 +1,14 @@
+query getStatPortfolios($start: LocalDateTime, $end: LocalDateTime, $interval: IntervalType, $portfolioAddress: String) {
+  portfolioIntervalDatas(first: 100, where: { portfolioAddress: $portfolioAddress, interval: $interval, dateTime_gt: $start, dateTime_lt: $end} ) {
+    id
+    dateTime
+    tvlUSD
+#    volume24hUSD
+    tvlBase
+#    tvl_d
+#    fees24hUSD
+#    volume24h
+#    volume30d
+#    volume7dUSD
+  }
+}

@@ -1,5 +1,4 @@
 export enum RootGettersType {
-  GET_DICTIONARIES = 'getDictionaries',
-  IS_LOADING_DICTIONARIES = 'isLoadingDictionaries',
+  GET_ACTIVE_NETWORK = 'getActiveNetwork',
 }
 

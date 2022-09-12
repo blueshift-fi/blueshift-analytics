@@ -24,7 +24,7 @@ export default defineComponent({
     },
     rowKeyName: {
       type: String,
-      default: 'name'
+      default: 'id'
     },
     visibleColumns: {
       type: Array as PropType<string[]>

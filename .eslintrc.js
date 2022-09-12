@@ -84,6 +84,7 @@ module.exports = {
     semi: [1, "always"],
     "space-before-function-paren": [2, "never"],
     "indent": ["error", 2, { "SwitchCase": 1 }],
+    "object-curly-spacing": ["error", "always"],
 
     // TypeScript
     "vue/html-quotes": [ "error", "double", { "avoidEscape": false } ],

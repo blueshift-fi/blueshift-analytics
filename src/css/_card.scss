@@ -1,8 +1,8 @@
 .ui-card {
-  background: $card-bg;
+  background: #00071A;
   border: $card-border;
   border-radius: $border-radius;
-  backdrop-filter: $glass-filter;
+  //backdrop-filter: $glass-filter;
   display: flex;
   flex-direction: column;
 
@@ -24,7 +24,7 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     .chart-stats, .chart-controller {
-      margin-top: 12px;
+      //margin-top: 12px;
     }
   }
 }

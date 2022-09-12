@@ -1,0 +1,18 @@
+query getTopTransactions {
+  transactions(first: 50, orderBy: dateTime, orderDirection: desc) {
+    addressId
+    blockNumber
+    dateTime
+    gasPrice
+    gasUsed
+    id
+    swaps{
+      token0 {
+        name
+      }
+      token1 {
+        name
+      }
+    }
+  }
+}

@@ -1,21 +1,20 @@
 <template>
-  <div class="content-wrapper">
-    <Header />
-    <div class="content">
-      <router-view />
+  <Updater>
+    <div class="content-wrapper">
+      <Header/>
+      <div class="content">
+        <router-view/>
+      </div>
+      <Footer/>
     </div>
-    <Footer />
-  </div>
+  </Updater>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onMounted, provide } from 'vue';
-import { useStore } from '@/store';
-import { RootGettersType } from '@/store/names/getters.names';
+import { defineComponent } from 'vue';
 import Header from '@/views/Header/Header.vue';
 import Footer from '@/views/Footer/Footer.vue';
 import { useQuasar } from 'quasar';
-import { RootActionsType } from '@/store/names/actions.names';
-import { getDictionariesInjectName, isLoadingDictionariesInjectName } from '@/injectsNames/dictionariesInjects';
+import Updater from '@/components/Updater/Updater.vue';
 
 export default defineComponent({
   name: 'App',
@@ -23,25 +22,15 @@ export default defineComponent({
   components: {
     Footer,
     Header,
+    Updater,
   },
 
   setup() {
-    const { getters, dispatch } = useStore();
-
-    const isLoadingDictionaries = computed(() => <boolean>getters[RootGettersType.IS_LOADING_DICTIONARIES]);
-    const dictionaries = computed(() => <boolean>getters[RootGettersType.GET_DICTIONARIES]);
-
-    provide(isLoadingDictionariesInjectName, isLoadingDictionaries);
-    provide(getDictionariesInjectName, dictionaries);
-
     const $q = useQuasar();
-    $q.screen.setSizes({ sm: 767, md: 1365, lg: 1599, xl: 1919 });
-
-    onMounted(() => {
-      void dispatch(RootActionsType.FETCH_DICTIONARIES);
-    });
+    // $q.screen.setSizes({ sm: 767, md: 1000, lg: 1599, xl: 1919 });
 
     return {
+      $q
     };
   },
 });

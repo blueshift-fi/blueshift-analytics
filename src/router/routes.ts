@@ -8,14 +8,24 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/PageMain/PageMain.vue')
   },
   {
-    path: '/dao/:id',
-    name: RouterNames.DAO_PAGE,
-    component: () => import('@/views/PageDao/PageDao.vue')
+    path: '/portfolios',
+    name: RouterNames.PORTFOLIO_LIST_PAGE,
+    component: () => import('@/views/PagePortfolioList/PagePortfolioList.vue')
   },
   {
-    path: '/news',
-    name: RouterNames.NEWS_PAGE,
-    component: () => import('@/views/PageNews/PageNews.vue')
+    path: '/portfolios/:id',
+    name: RouterNames.PORTFOLIO_PAGE,
+    component: () => import('@/views/PagePortfolio/PagePortfolio.vue')
+  },
+  {
+    path: '/tokens',
+    name: RouterNames.TOKEN_LIST_PAGE,
+    component: () => import('@/views/PageTokenList/PageTokenList.vue')
+  },
+  {
+    path: '/tokens/:id',
+    name: RouterNames.TOKEN_PAGE,
+    component: () => import('@/views/PageTokenList/PageTokenList.vue')
   },
   {
     path: '/ui',

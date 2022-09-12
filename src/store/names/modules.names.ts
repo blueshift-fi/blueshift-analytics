@@ -1,5 +1,5 @@
 export enum ModulesNames {
-  MAIN_STATISTICS = 'mainStatistics',
-  DAO = 'dao',
-  NEWS = 'news'
+  TOKENS = 'tokens',
+  TRANSACTIONS = 'transactions',
+  PORTFOLIOS = 'portfolios'
 }
