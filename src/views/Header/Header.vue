@@ -1,34 +1,22 @@
 <template>
   <header class="flex justify-between w-full">
-    <Menu />
-    <BaseDropDownButton>
-      <template #label>
-        <div class="flex justify-between items-center">
-          <img :src="activeNetwork.imageURL" width="15" height="15" class="q-mr-sm">
-          <div>{{ activeNetwork.name }}</div>
-        </div>
-      </template>
-      <template #default>
-        <q-list>
-          <q-item
-            v-for="net in mappedSupportedNetworks"
-            :key="net?.id"
-            clickable
-            v-close-popup
-            @click="changeActiveNetwork(net)"
-          >
-            <q-item-section>
-              <q-item-label>
-                <div class="flex justify-around">
-                  <img :src="net.imageURL" width="15" height="15">
-                  <div>{{ net.name }}</div>
-                </div>
-              </q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </template>
-    </BaseDropDownButton>
+    <div class="header-content flex justify-between items-center">
+      <div class="flex items-center">
+        <Logo class="q-mr-xl" />
+        <Menu class="q-mr-auto" v-if="$q.screen.gt.sm" />
+      </div>
+      <div class="flex items-center q-gutter-x-md">
+        <template v-if="$q.screen.gt.xs">
+          <div class="flex items-center">
+            <div class="caption q-mr-sm">{{ baseTokenInfo.symbol }} price:</div>
+            <div class="text-sm">${{ baseTokenInfo.price }}</div>
+          </div>
+          <NetworkSelect />
+        </template>
+        <BaseButton label="Go to App" class-name="button-base" @click="goToApp" v-if="$q.screen.gt.sm"/>
+        <HeaderMobileMenu v-else :base-token-info="baseTokenInfo" />
+      </div>
+    </div>
   </header>
 </template>
 

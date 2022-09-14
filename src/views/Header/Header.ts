@@ -1,34 +1,35 @@
 import { computed, defineComponent } from 'vue';
 import Logo from '@/components/Logo/Logo.vue';
-import BaseDropDownButton from '@/components/baseComponents/BaseDropDownButton/BaseDropDownButton.vue';
-import { mappedSupportedNetworks, NetworkInfo } from '@/app.options/networks';
-import { useStore } from '@/store';
-import { RootGettersType } from '@/store/names/getters.names';
-import { RootMutationsType } from '@/store/names/mutations.names';
 import Menu from '@/views/Header/Menu/Menu.vue';
+import BaseButton from '@/components/baseComponents/BaseButton/BaseButton.vue';
+import { useUtils } from '@/composables/useUtils';
+import HeaderMobileMenu from '@/views/Header/HeaderMobileMenu/HeaderMobileMenu.vue';
+import NetworkSelect from '@/views/Header/NetworkSelect/NetworkSelect.vue';
+import { EXTERNAL_LINKS } from '@/constants/EXTERNAL_LINKS';
 
 export default defineComponent({
   name: 'Header',
 
   components: {
     Logo,
-    BaseDropDownButton,
     Menu,
+    BaseButton,
+    HeaderMobileMenu,
+    NetworkSelect
   },
 
   setup() {
-    const { getters, commit } = useStore();
+    const { openExternalLink } = useUtils();
 
-    const activeNetwork = computed(() => <NetworkInfo>getters[RootGettersType.GET_ACTIVE_NETWORK]);
+    const baseTokenInfo = computed(() => ({ price: '0,49', symbol: 'ADA' }));
 
-    const changeActiveNetwork = (network: NetworkInfo) => {
-      commit(RootMutationsType.SET_ACTIVE_NETWORK, network);
+    const goToApp = () => {
+      openExternalLink(EXTERNAL_LINKS.BLUESHIFT_APP);
     };
 
     return {
-      changeActiveNetwork,
-      activeNetwork,
-      mappedSupportedNetworks
+      goToApp,
+      baseTokenInfo
     };
-  }
+  },
 });

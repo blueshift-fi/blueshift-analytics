@@ -1,17 +1,50 @@
 %button {
   height: $control-height;
+  min-width: $control-height;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
   border-radius: $border-radius;
-  color: var(--text-color);
-  font-size: $font-size-sm;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  padding: 0.5rem 1.25rem;
-  min-height: unset;
-
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: inherit;
+  font-family: $font-family-base;
+  font-weight: 400;
+  font-size: $font-size-base;
+  text-transform: none;
+  background-color: transparent;
   &[disabled] {
-    opacity: 1 !important;
-    color: var(--text-muted-color);
+    opacity: 0.7;
+    cursor: initial;
+  }
+}
+%button-control {
+  display: inline-flex;
+  align-items: center;
+  min-width: unset;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: unset;
+  &:not(.button-no-hover):not([disabled]) {
+    &:hover, {
+      color: var(--control-icon-hover-color);
+    }
+    &:active,
+    &:focus {
+      color: var(--control-icon-active-color);
+    }
+  }
+  &[disabled] {
+    opacity: 0.3;
+    cursor: unset;
   }
 }
 
@@ -23,15 +56,61 @@
 }
 
 %overlay-base {
+  background: var(--panel-base-bg-color);
+  border: 1px solid var(--border-base-color);
+  box-shadow: $shadow;
+  border-radius: $border-radius;
+  margin-top: 0.25rem;
   display: flex;
   flex-direction: column;
-  background-color: $overlay-panel-bg;
-  border: $overlay-panel-border;
-  border-radius: $border-radius;
-  box-shadow: $shadow;
   max-width: calc(100vw - #{$content-px-mobile} * 2);
 }
 
 %overlay-base-padding {
   padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+}
+%select-option {
+  min-height: $control-height;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  box-sizing: border-box;
+  &:not([disabled]) {
+    &:hover {
+      background: var(--select-option-hover-bg-color);
+    }
+    &:active, &.active, &:focus {
+      background: var(--select-option-active-bg-color);
+      color:  var(--select-option-active-color);
+    }
+  }
+  &[disabled] {
+    opacity: 0.4;
+    cursor: unset;
+  }
+}
+%select-option-button {
+  min-height: $control-height;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+  border-radius: $border-radius;
+  cursor: pointer;
+  box-sizing: border-box;
+  background: var(--select-button-bg-color);
+  &:not([disabled]) {
+    &:hover {
+      background: var(--select-button-hover-bg-color);
+    }
+    &:active, &.active, &:focus {
+      background: var(--select-button-active-bg-color);
+    }
+  }
+  &[disabled] {
+    opacity: 0.4;
+    cursor: unset;
+  }
 }

@@ -3,33 +3,65 @@
 }
 
 .button-base {
-  background: $button-base-bg;
+  background: var(--button-base-bg-color);
+  color: var(--button-secondary-color);
   &:not([disabled]) {
-    &:hover, &:active, &:focus {
-      background: $button-base-hover-bg;
-      color: $button-base-hover-color;
+    &:hover {
+      background: var(--button-base-hover-bg-color);
     }
+    &:active, &.active,
+    &:focus {
+      background: var(--button-base-active-bg-color);
+    }
+  }
+  &[disabled] {
+    cursor: initial;
   }
 }
 
 .button-primary {
-  background: $button-primary-bg;
+  background: var(--button-primary-bg-color);
+  color: var(--button-primary-color);
+  svg path {
+    fill: var(--button-primary-color);
+  }
   &:not([disabled]) {
     &:hover {
-      opacity: 0.8;
+      background: var(--button-primary-hover-bg-color);
     }
-    &:active {
-      opacity: 1;
+    &:focus, &:active {
+      background: var(--button-primary-bg-color);
     }
+  }
+  &[disabled] {
+    cursor: initial;
   }
 }
 
 .button-sm {
   height: $control-height-sm;
-  font-size: $font-size-xs;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  padding: 0.4rem 1rem;
+  min-width: $control-height-sm !important;
+  font-weight: 400;
+}
+
+.button-lg {
+  height: $control-height-lg;
+  min-width: $control-height-lg;
+  font-weight: 500;
+  &:not(.button-icon) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.button-control-icon {
+  @extend %button-control;
+  height: 1.25rem;
+  width: 1.25rem;
+  color: var(--control-icon-color);
+  &_gray {
+    color: var(--caption-color);
+  }
 }
 
 .button-icon {
@@ -55,7 +87,7 @@
 .ui-dd-button {
   @extend %button;
   &:hover, &:active, &:focus {
-    color: $button-base-hover-color;
+    color: var(--button-base-hover-color);
     .q-focus-helper {
       background: none !important;
     }
@@ -74,14 +106,14 @@
   font-weight: 400;
   padding: 0.5rem 0.75rem;
   &:not([disabled]):not(.button-tumbler-active):hover {
-    background: $button-base-hover-bg;
+    background:  var(--button-base-hover-bg-color);
   }
   &.button-tumbler-active {
     @extend .button-primary;
   }
 }
 .button-tumbler-group {
-  background: $button-base-bg;
+  background: var(--button-base-bg-color);
   border-radius: $border-radius;
   padding: 2px;
 }

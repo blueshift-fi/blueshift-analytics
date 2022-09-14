@@ -23,13 +23,21 @@ export default defineComponent({
     },
     className: {
       type: String,
-      default: ''
+      default: 'button-base'
+    },
+    contentClass: {
+      type: String,
+      default: 'ui-select-options'
     },
     to: {
       type: String
     },
     header: {
       type: String
+    },
+    icon: {
+      type: String,
+      default: 'eva-arrow-ios-downward-outline'
     }
   },
 

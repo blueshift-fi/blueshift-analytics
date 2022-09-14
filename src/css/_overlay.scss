@@ -1,3 +1,4 @@
+
 .ui-dd-menu {
   @extend %overlay-base;
   @extend %overlay-base-padding;
@@ -54,13 +55,7 @@
 
 .ui-select-options {
   @extend %overlay-base;
-}
-
-.q-menu {
-  @extend %overlay-base;
-  .q-item:hover {
-    background: var(--q-dark4);
-  }
+  padding: 0.5rem;
 }
 
 .q-tooltip {
@@ -69,4 +64,10 @@
   border: $tooltip-border;
   box-shadow: $shadow;
   line-height: 20px;
+}
+
+.dd-list {
+  .q-item {
+    @extend %select-option;
+  }
 }

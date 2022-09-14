@@ -6,6 +6,7 @@
     :type="type"
     :to="to"
     :disable="disabled"
+    :ripple="false"
     :class="`ui-button ${className}`"
     @click="click"
     flat

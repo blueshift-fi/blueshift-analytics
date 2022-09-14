@@ -14,5 +14,9 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    noIcon: {
+      type: Boolean,
+      default: false
+    }
   },
 });

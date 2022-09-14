@@ -1,6 +1,6 @@
 <template>
   <a
-    class="row inline no-wrap items-center text-primary"
+    class="row inline no-wrap items-center"
     :class="disabled ? 'disabled' : 'cursor-pointer'"
     :href="url"
     target="_blank"
@@ -8,7 +8,7 @@
     <div class="q-mr-1 text-link" v-if="label">
       {{ label }}
     </div>
-      <q-icon class="eva eva-external-link" size="16px" />
+      <q-icon class="eva eva-external-link" size="16px" v-if="!noIcon" />
   </a>
 </template>
 

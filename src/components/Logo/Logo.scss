@@ -1,0 +1,19 @@
+.logo {
+  width: 236px;
+  .screen--sm & {
+    width: 215px;
+  }
+  .screen--xs & {
+    width: 178px;
+  }
+}
+
+path.white {
+  fill: var(--white) !important;
+}
+path.secondary {
+  fill: var(--secondary) !important;
+}
+path.gray {
+  fill: var(--gray) !important;
+}

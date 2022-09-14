@@ -1,6 +1,7 @@
 // app global css in SCSS form
 @import "./fonts/fonts.css";
 @import "rebase";
+@import "layout";
 @import "placeholder";
 @import "sizing";
 @import "typo";
@@ -22,31 +23,14 @@ body, body.body--dark  {
 }
 
 #q-app {
-  //background-image: var(--page-background-pattern), var(--body-background-image-top), var(--body-background-image-bottom);
-  //background-repeat: repeat, no-repeat, no-repeat;
-  //background-position: top left, top center, bottom center;
-  //background: radial-gradient(40.99% 46% at 50% 31%, rgba(9, 20, 123, 0.12) 0%, rgba(5, 20, 164, 0) 100%), var(--page-background-pattern), #161617;
   min-height: 100vh;
-  //TODO
-  background: linear-gradient(180deg, rgba(9, 20, 123, 0.24) -15%, rgba(9, 20, 123, 0) 77%), var(--page-background-pattern), #00071A;
-  background-repeat: repeat, repeat, repeat, repeat;
-  //background-color: black;
-  //background-image: var(--page-background-pattern);
-  //background-repeat: repeat;
 }
 .content-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-.content, footer {
-  max-width: calc(#{$content-max-width} + 2 * #{$content-px-desktop});
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: $content-px-desktop;
-  padding-right: $content-px-desktop;
-  width: 100%;
-}
+
 .content {
   flex-grow: 1;
 }

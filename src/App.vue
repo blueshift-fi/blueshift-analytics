@@ -1,11 +1,11 @@
 <template>
   <Updater>
-    <div class="content-wrapper">
-      <Header/>
-      <div class="content">
+    <div class="layout">
+      <div class="content w-full flex column">
         <router-view/>
       </div>
       <Footer/>
+      <Header/>
     </div>
   </Updater>
 </template>
@@ -27,8 +27,7 @@ export default defineComponent({
 
   setup() {
     const $q = useQuasar();
-    // $q.screen.setSizes({ sm: 767, md: 1000, lg: 1599, xl: 1919 });
-
+    $q.screen.setSizes({ sm: 576, md: 1200, lg: 1599, xl: 1919 });
     return {
       $q
     };
