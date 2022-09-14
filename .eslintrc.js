@@ -90,6 +90,7 @@ module.exports = {
     "vue/html-quotes": [ "error", "double", { "avoidEscape": false } ],
     quotes: ['warn', 'single', { avoidEscape: true }],
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',

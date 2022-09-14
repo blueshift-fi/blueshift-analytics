@@ -1,20 +1,9 @@
 <template>
-  <div class="text-center text-muted copyright">
+  <div class="text-center caption opacity-50">
     © Blueshift {{ new Date().getFullYear() }}. All rights reserved.
   </div>
 </template>
 
 <script setup></script>
 <style lang="scss" scoped>
-.copyright {
-  margin-top: 24px;
-}
-.screen--sm .copyright {
-  margin-top: 44px;
-}
-
-.screen--xs .copyright {
-  margin: 0 $content-px-mobile 0 $content-px-mobile;
-  padding-top: 44px;
-}
 </style>

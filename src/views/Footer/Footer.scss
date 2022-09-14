@@ -1,13 +1,10 @@
-footer {
-  margin-bottom: 0;
-  padding-bottom: 40px;
-  margin-top: 48px;
+.footer-content {
+  margin: 0 auto;
+  max-width: $content-max-width;
+  width: calc(100vw - 48px);
 }
-.screen--sm footer {
-  margin-top: 84px;
-  padding-bottom: 48px;
-}
-.screen--xs footer {
-  margin-top: 50px;
-  padding-bottom: 50px;
+
+.screen--sm .footer-content {
+  max-width: $content-max-width-tablet;
+  width: $tablet-width-full;
 }

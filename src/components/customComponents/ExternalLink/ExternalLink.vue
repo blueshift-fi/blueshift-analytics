@@ -5,7 +5,7 @@
     :href="url"
     target="_blank"
   >
-    <div class="q-mr-1 text-link" v-if="label">
+    <div class="q-mr-1 text-link text-no-wrap" v-if="label">
       {{ label }}
     </div>
       <q-icon class="eva eva-external-link" size="16px" v-if="!noIcon" />

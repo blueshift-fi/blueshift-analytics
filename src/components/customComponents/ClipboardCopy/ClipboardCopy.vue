@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="q-mr-1 text-link">
-      {{ textEllipsis ? ellipsisText(data, 7) : data }}
+      {{ ellipsis ? textEllipsis(data, 4,4) : data }}
     </div>
     <q-icon class="eva eva-copy-outline" size="16px" />
   </div>

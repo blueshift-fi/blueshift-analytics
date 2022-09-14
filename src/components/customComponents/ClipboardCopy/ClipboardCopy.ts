@@ -1,5 +1,6 @@
 import { defineComponent, ref } from 'vue';
 import { useLayout } from '@/composables/useLayout';
+import  { useUtils } from '@/composables/useUtils';
 
 export default defineComponent({
   name: 'ClipboardCopy',
@@ -12,7 +13,7 @@ export default defineComponent({
     color: {
       type: String,
     },
-    textEllipsis: {
+    ellipsis: {
       type: Boolean,
       default: false
     },
@@ -23,7 +24,8 @@ export default defineComponent({
   },
   setup(props) {
     const visibleTooltip = ref(false);
-    const { ellipsisText, copyToClipboard } = useLayout();
+    const { textEllipsis } = useUtils();
+    const { copyToClipboard } = useLayout();
 
     const copyText = () => {
       visibleTooltip.value = true;
@@ -34,7 +36,7 @@ export default defineComponent({
     return {
       copyText,
       visibleTooltip,
-      ellipsisText,
+      textEllipsis,
       copyToClipboard,
     };
   },

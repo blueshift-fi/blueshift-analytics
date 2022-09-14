@@ -16,14 +16,6 @@ export function useLayout() {
     }
   };
 
-  const ellipsisText = (string: string, length?: number) => {
-    if (!length) {
-      return string ? string : null;
-    } else {
-      return string.slice(0, length) + '...' + string.slice(-4);
-    }
-  };
-
   const copyToClipboard = (data: string) => {
     void navigator.clipboard.writeText(data);
   };
@@ -88,7 +80,6 @@ export function useLayout() {
     chartViewDif,
     setChartViewDif,
     getLabelLink,
-    ellipsisText,
     copyToClipboard,
     // getSocialLinksByName,
     // getLinkByName,

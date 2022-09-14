@@ -14,7 +14,14 @@
         <div class="text-sm">{{ baseTokenPrice }}</div>
       </div>
       <NetworkSelect class="full-width" />
+
+      <InfoPanel class="q-my-md" />
+      <FooterMenu />
+      <SocialNetworks  class="q-my-xl" />
+      <Copyright />
+
     </div>
+
   </BaseDropDownButton>
 </template>
 
@@ -23,6 +30,10 @@ import { computed, ref } from 'vue';
 import BaseDropDownButton from '@/components/baseComponents/BaseDropDownButton/BaseDropDownButton.vue';
 import Menu from '@/views/Header/Menu/Menu.vue';
 import NetworkSelect from '@/views/Header/NetworkSelect/NetworkSelect.vue';
+import InfoPanel from '@/views/Footer/InfoPanel/InfoPanel.vue';
+import FooterMenu from '@/views/Footer/FooterMenu/FooterMenu.vue';
+import SocialNetworks from '@/components/SocialNetworks/SocialNetworks.vue';
+import Copyright from '@/components/Copyright/Copyright.vue';
 
 const props = defineProps<{
   baseTokenInfo: Record<string, string>;
