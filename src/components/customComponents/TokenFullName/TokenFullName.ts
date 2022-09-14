@@ -15,9 +15,9 @@ export default defineComponent({
     symbol: {
       type: String
     },
-    logo: {
+    addressId: {
       type: String,
-      default: ''
+      required: true
     },
     logoSize: {
       type: String
@@ -25,6 +25,9 @@ export default defineComponent({
     id: {
       type: Number,
       required: true
+    },
+    isBase: {
+      type: Boolean,
     }
   },
 

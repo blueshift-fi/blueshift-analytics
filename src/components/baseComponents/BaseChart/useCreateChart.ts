@@ -1,12 +1,15 @@
 import { createChart, SingleValueData } from 'lightweight-charts';
-import { areaOptions, chartOptions } from '@/components/baseComponents/BaseChart/options';
+import { areaOptions, barOptions, chartOptions } from '@/components/baseComponents/BaseChart/options';
 import { ChartController } from '@/components/baseComponents/BaseChart/types';
 import { cloneDeep } from 'lodash';
 import { useChartTooltip } from '@/components/baseComponents/BaseChart/useChartTooltip';
 
-export const useCreateChart = (wrapper: HTMLElement, data: SingleValueData[]): ChartController => {
+//TODO chart types to type!
+export const useCreateChart = (wrapper: HTMLElement, data: SingleValueData[], type: 'Area' | 'Histogram'): ChartController => {
   const chart = createChart(wrapper, chartOptions);
-  const areaSeries = chart.addAreaSeries(areaOptions);
+  const areaSeries = type === 'Area' ?
+    chart.addAreaSeries(areaOptions) :
+    chart.addHistogramSeries(barOptions);
 
   areaSeries.setData(cloneDeep(data));
   chart.timeScale().fitContent();

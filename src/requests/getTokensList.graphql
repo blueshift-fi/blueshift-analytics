@@ -1,0 +1,32 @@
+query getTokensList {
+  tokens(first: 50, orderBy: name, orderDirection: desc) {
+    addressId
+    amount
+    decimals
+    depositEMAPrice
+    depositLimit
+    fees24hETH
+    fees24hUSD
+    fees30dUSD
+    id
+    name
+    portfolioShare
+    #      portfolios: [Portfolio]
+    priceBase
+    priceETH
+    priceUSD
+    symbol
+    targetWeight
+    totalSupply
+    tvlETH
+    tvlUSD
+    tvlUSD24hChange
+    volume24hETH
+    volume24hUSD
+    volume30dUSD
+    volumeUSD24hChange
+    volumeUSD7dChange
+    withdrawEMAPrice
+    withdrawLimit
+  }
+}

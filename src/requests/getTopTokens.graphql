@@ -1,24 +1,32 @@
 query getTopTokens {
   tokens(first: 50, orderBy: name, orderDirection: desc) {
-#    addressId
-#    decimals
-#    derivedBase
-#    derivedETH
-#    derivedUSD
-#    feesUSD
+    addressId
+    amount
+    decimals
+    depositEMAPrice
+    depositLimit
+    fees24hETH
+    fees24hUSD
+    fees30dUSD
     id
     name
+    portfolioShare
+    #      portfolios: [Portfolio]
+    priceBase
+    priceETH
     priceUSD
+    symbol
+    targetWeight
+    totalSupply
+    tvlETH
     tvlUSD
+    tvlUSD24hChange
+    volume24hETH
     volume24hUSD
-#    poolCount
-#    totalSupply
-#    totalValueLocked
-#    amount
-#    symbol
-#    totalValueLockedUSDUntracked
-#    txCount
-#    untrackedVolumeUSD
-#    volume
+    volume30dUSD
+    volumeUSD24hChange
+    volumeUSD7dChange
+    withdrawEMAPrice
+    withdrawLimit
   }
 }

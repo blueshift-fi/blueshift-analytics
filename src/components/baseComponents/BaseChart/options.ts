@@ -1,4 +1,10 @@
-import { AreaSeriesPartialOptions, ChartOptions, DeepPartial, LineStyle } from 'lightweight-charts';
+import {
+  AreaSeriesPartialOptions,
+  ChartOptions,
+  DeepPartial,
+  HistogramSeriesPartialOptions,
+  LineStyle
+} from 'lightweight-charts';
 import { ChartColors, ChartSizes } from '@/components/baseComponents/BaseChart/constants';
 import { getDate } from '@/utils/getDate';
 
@@ -61,4 +67,9 @@ export const areaOptions: AreaSeriesPartialOptions = {
   crosshairMarkerRadius: ChartSizes.MARKER_RADIUS,
   crosshairMarkerBorderColor: ChartColors.BLUE_MAIN,
   crosshairMarkerBackgroundColor: ChartColors.BLACK_MARKER
+};
+
+export const barOptions: HistogramSeriesPartialOptions = {
+  priceLineVisible: false,
+  lastValueVisible: false,
 };

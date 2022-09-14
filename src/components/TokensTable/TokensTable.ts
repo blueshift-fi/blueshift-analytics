@@ -4,6 +4,8 @@ import { Token } from '@/generated/graphql';
 import { getTokensColumns, TokensTableColumnNames } from '@/app.options/tables/tokensTable';
 import { getTemplateFullName, getVisibleColumn } from '@/app.options/tables/utils';
 import TokenFullName from '@/components/customComponents/TokenFullName/TokenFullName.vue';
+import { getDataForCell } from '@/utils/getDataForCell';
+import { getConvertedNumber } from '@/utils/getConvertedNumber';
 
 export default defineComponent({
   name: 'TokensTable',
@@ -28,6 +30,8 @@ export default defineComponent({
     return {
       TokensTableColumnNames,
       getTemplateFullName,
+      getDataForCell,
+      getConvertedNumber,
       getTokensColumns,
       getVisibleColumn
     };

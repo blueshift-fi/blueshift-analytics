@@ -32,7 +32,7 @@ export const getPortfoliosColumns = (): TableColumn[] => [
     name: PortfoliosTableColumnNames.VOLUME,
     label: 'Volume',
     align: 'left',
-    field: (val: Portfolio) => getDataForCell(val?.volume24hBase),
+    field: (val: Portfolio) => getDataForCell(val?.volume30dUSD),
     hidden: {
       xs: true,
     }
@@ -42,8 +42,8 @@ export const getPortfoliosColumns = (): TableColumn[] => [
     label: 'LP Token Price',
     align: 'left',
     field: (val: Portfolio) => getDataForCell(
-      getConvertedNumber(val.lpToken?.amount
-        ? { number: val.lpToken?.amount, currency: 'USD' }
+      getConvertedNumber(val.lpToken?.priceUSD
+        ? { number: val.lpToken?.priceUSD, currency: 'USD' }
         : undefined)
     ),
     hidden: {
@@ -55,7 +55,7 @@ export const getPortfoliosColumns = (): TableColumn[] => [
     name: PortfoliosTableColumnNames.LP_TOKEN_PRICE_CHANGE,
     label: 'LP Token Price Change',
     align: 'left',
-    field: (val: Portfolio) => getDataForCell(val?.lpToken?.amount),
+    field: (val: Portfolio) => getDataForCell(val?.lpToken?.priceUSD),
     hidden: {
       xs: true,
       sm: true

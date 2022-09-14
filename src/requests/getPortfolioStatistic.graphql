@@ -3,12 +3,6 @@ query getStatPortfolios($start: LocalDateTime, $end: LocalDateTime, $interval: I
     id
     dateTime
     tvlUSD
-#    volume24hUSD
-    tvlBase
-#    tvl_d
-#    fees24hUSD
-#    volume24h
-#    volume30d
-#    volume7dUSD
+    volume24hUSD
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <CardChart >
+  <CardChart>
     <template #default>
       <BaseChart
         :title="title"

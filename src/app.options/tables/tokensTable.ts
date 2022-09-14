@@ -1,6 +1,7 @@
 import { getDataForCell } from '@/utils/getDataForCell';
 import { Token } from '@/generated/graphql';
 import { TableColumn } from '@/components/baseComponents/BaseTable/types';
+import { getConvertedNumber } from '@/utils/getConvertedNumber';
 
 export enum TokensTableColumnNames {
   NAME = 'name',
@@ -21,7 +22,11 @@ export const getTokensColumns = (): TableColumn[] => [
     name: TokensTableColumnNames.PRICE,
     label: 'Price',
     align: 'left',
-    field: (val: Token) => getDataForCell(val?.priceUSD),
+    field: (val: Token) => getDataForCell(
+      getConvertedNumber(val?.priceUSD
+        ? { number: val.priceUSD, currency: 'USD' }
+        : undefined)
+    ),
   },
   {
     name: TokensTableColumnNames.PRICE_CHANGE,
@@ -46,7 +51,11 @@ export const getTokensColumns = (): TableColumn[] => [
     name: TokensTableColumnNames.TVL,
     label: 'TVL',
     align: 'left',
-    field: (val: Token) => getDataForCell(val?.tvlUSD),
+    field: (val: Token) => getDataForCell(
+      getConvertedNumber(val?.tvlUSD
+        ? { number: val.tvlUSD, currency: 'USD' }
+        : undefined)
+    ),
     hidden: {
       xs: true,
       sm: true

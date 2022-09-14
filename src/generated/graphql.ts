@@ -99,24 +99,30 @@ export type Explorer = {
 export type Factory = {
   __typename?: 'Factory';
   dateTime?: Maybe<Scalars['LocalDateTime']>;
+  fees24hChange?: Maybe<Scalars['BigDecimal']>;
+  fees24hUSD?: Maybe<Scalars['BigDecimal']>;
   id?: Maybe<Scalars['ID']>;
   interval?: Maybe<IntervalType>;
-  totalFeesUSD?: Maybe<Scalars['BigDecimal']>;
-  totalValueLockedUSD?: Maybe<Scalars['BigDecimal']>;
-  totalVolumeUSD?: Maybe<Scalars['BigDecimal']>;
+  tvl24hChange?: Maybe<Scalars['BigDecimal']>;
+  tvlUSD?: Maybe<Scalars['BigDecimal']>;
   txCount?: Maybe<Scalars['Long']>;
+  txCount24hChange?: Maybe<Scalars['Long']>;
+  volume24hChange?: Maybe<Scalars['BigDecimal']>;
+  volume24hUSD?: Maybe<Scalars['BigDecimal']>;
 };
 
 export type Factory_Filter = {
   dateTime?: InputMaybe<Scalars['LocalDateTime']>;
   dateTime_gt?: InputMaybe<Scalars['LocalDateTime']>;
+  dateTime_lt?: InputMaybe<Scalars['LocalDateTime']>;
   interval?: InputMaybe<IntervalType>;
 };
 
 export enum Factory_OrderBy {
   DateTime = 'dateTime',
-  TotalValueLockedUsd = 'totalValueLockedUSD',
-  TotalVolumeUsd = 'totalVolumeUSD'
+  Fees24hUsd = 'fees24hUSD',
+  TvlUsd = 'tvlUSD',
+  Volume24hUsd = 'volume24hUSD'
 }
 
 export type Health = {
@@ -304,7 +310,7 @@ export enum Portfolio_OrderBy {
   AddressId = 'addressId',
   Id = 'id',
   Name = 'name',
-  TotalValueLockedUsd = 'totalValueLockedUSD'
+  TvlUsd = 'tvlUSD'
 }
 
 export type PriceEth = {
@@ -581,7 +587,7 @@ export enum Token_OrderBy {
   Id = 'id',
   Name = 'name',
   Symbol = 'symbol',
-  TotalValueLockedUsd = 'totalValueLockedUSD'
+  TvlUsd = 'tvlUSD'
 }
 
 /** crypto transaction */
@@ -616,7 +622,7 @@ export type GetPortfolioQueryVariables = Exact<{
 }>;
 
 
-export type GetPortfolioQuery = { __typename?: 'Query', portfolios?: Array<{ __typename?: 'Portfolio', id?: string | null, name?: string | null, lpTokenAddress?: string | null, tvlUSD?: number | null, addressId?: string | null, fees30dUSD?: number | null, lpToken?: { __typename?: 'Token', priceUSD?: number | null } | null, baseToken?: { __typename?: 'Token', name?: string | null, id?: string | null, amount?: number | null } | null, tokens?: Array<{ __typename?: 'Token', name?: string | null, id?: string | null, amount?: number | null } | null> | null } | null> | null };
+export type GetPortfolioQuery = { __typename?: 'Query', portfolios?: Array<{ __typename?: 'Portfolio', addressId?: string | null, baseTokenAddress?: string | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, lpTokenAddress?: string | null, lpTokenPrice?: number | null, lpTokenPriceUSD?: number | null, name?: string | null, tvlBase?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, txCount?: number | null, volume24hBase?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30d?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, baseToken?: { __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null, lpToken?: { __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null, tokens?: Array<{ __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null> | null } | null> | null };
 
 export type GetStatPortfoliosQueryVariables = Exact<{
   start?: InputMaybe<Scalars['LocalDateTime']>;
@@ -626,17 +632,36 @@ export type GetStatPortfoliosQueryVariables = Exact<{
 }>;
 
 
-export type GetStatPortfoliosQuery = { __typename?: 'Query', portfolioIntervalDatas?: Array<{ __typename?: 'PortfolioIntervalDataDto', id?: string | null, dateTime?: string | null, tvlUSD?: number | null, tvlBase?: number | null } | null> | null };
+export type GetStatPortfoliosQuery = { __typename?: 'Query', portfolioIntervalDatas?: Array<{ __typename?: 'PortfolioIntervalDataDto', id?: string | null, dateTime?: string | null, tvlUSD?: number | null, volume24hUSD?: number | null } | null> | null };
+
+export type GetPortfoliosListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPortfoliosListQuery = { __typename?: 'Query', portfolios?: Array<{ __typename?: 'Portfolio', addressId?: string | null, baseTokenAddress?: string | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, lpTokenAddress?: string | null, lpTokenPrice?: number | null, lpTokenPriceUSD?: number | null, name?: string | null, tvlBase?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, txCount?: number | null, volume24hBase?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30d?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, baseToken?: { __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null, lpToken?: { __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null, tokens?: Array<{ __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null> | null } | null> | null };
+
+export type GetTvlStatisticQueryVariables = Exact<{
+  start?: InputMaybe<Scalars['LocalDateTime']>;
+  end?: InputMaybe<Scalars['LocalDateTime']>;
+  interval?: InputMaybe<IntervalType>;
+}>;
+
+
+export type GetTvlStatisticQuery = { __typename?: 'Query', factories?: Array<{ __typename?: 'Factory', id?: string | null, dateTime?: string | null, tvlUSD?: number | null } | null> | null };
+
+export type GetTokensListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTokensListQuery = { __typename?: 'Query', tokens?: Array<{ __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null> | null };
 
 export type GetTopPortfoliosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTopPortfoliosQuery = { __typename?: 'Query', portfolios?: Array<{ __typename?: 'Portfolio', id?: string | null, tvlUSD?: number | null, name?: string | null, lpToken?: { __typename?: 'Token', priceUSD?: number | null } | null, tokens?: Array<{ __typename?: 'Token', name?: string | null } | null> | null } | null> | null };
+export type GetTopPortfoliosQuery = { __typename?: 'Query', portfolios?: Array<{ __typename?: 'Portfolio', addressId?: string | null, baseTokenAddress?: string | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, lpTokenAddress?: string | null, lpTokenPrice?: number | null, lpTokenPriceUSD?: number | null, name?: string | null, tvlBase?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, txCount?: number | null, volume24hBase?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30d?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, baseToken?: { __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null, lpToken?: { __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null, tokens?: Array<{ __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null> | null } | null> | null };
 
 export type GetTopTokensQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTopTokensQuery = { __typename?: 'Query', tokens?: Array<{ __typename?: 'Token', id?: string | null, name?: string | null, priceUSD?: number | null, tvlUSD?: number | null, volume24hUSD?: number | null } | null> | null };
+export type GetTopTokensQuery = { __typename?: 'Query', tokens?: Array<{ __typename?: 'Token', addressId?: string | null, amount?: number | null, decimals?: number | null, depositEMAPrice?: number | null, depositLimit?: number | null, fees24hETH?: number | null, fees24hUSD?: number | null, fees30dUSD?: number | null, id?: string | null, name?: string | null, portfolioShare?: number | null, priceBase?: number | null, priceETH?: number | null, priceUSD?: number | null, symbol: string, targetWeight?: number | null, totalSupply?: number | null, tvlETH?: number | null, tvlUSD?: number | null, tvlUSD24hChange?: number | null, volume24hETH?: number | null, volume24hUSD?: number | null, volume30dUSD?: number | null, volumeUSD24hChange?: number | null, volumeUSD7dChange?: number | null, withdrawEMAPrice?: number | null, withdrawLimit?: number | null } | null> | null };
 
 export type GetTopTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -647,25 +672,113 @@ export type GetTopTransactionsQuery = { __typename?: 'Query', transactions?: Arr
 export const GetPortfolioDocument = gql`
     query getPortfolio($name: String) {
   portfolios(first: 50, orderBy: name, orderDirection: desc, where: {name: $name}) {
-    id
-    name
-    lpTokenAddress
-    tvlUSD
     addressId
-    lpToken {
-      priceUSD
-    }
     baseToken {
-      name
-      id
+      addressId
       amount
-    }
-    tokens {
-      name
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
       id
-      amount
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
     }
+    baseTokenAddress
+    fees24hETH
+    fees24hUSD
     fees30dUSD
+    id
+    lpToken {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    lpTokenAddress
+    lpTokenPrice
+    lpTokenPriceUSD
+    name
+    tokens {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    tvlBase
+    tvlUSD
+    tvlUSD24hChange
+    txCount
+    volume24hBase
+    volume24hETH
+    volume24hUSD
+    volume30d
+    volume30dUSD
+    volumeUSD24hChange
   }
 }
     `;
@@ -701,7 +814,7 @@ export const GetStatPortfoliosDocument = gql`
     id
     dateTime
     tvlUSD
-    tvlBase
+    volume24hUSD
   }
 }
     `;
@@ -731,18 +844,339 @@ export function useGetStatPortfoliosLazyQuery(variables: GetStatPortfoliosQueryV
   return VueApolloComposable.useLazyQuery<GetStatPortfoliosQuery, GetStatPortfoliosQueryVariables>(GetStatPortfoliosDocument, variables, options);
 }
 export type GetStatPortfoliosQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetStatPortfoliosQuery, GetStatPortfoliosQueryVariables>;
+export const GetPortfoliosListDocument = gql`
+    query getPortfoliosList {
+  portfolios(first: 50, orderBy: name, orderDirection: desc) {
+    addressId
+    baseToken {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    baseTokenAddress
+    fees24hETH
+    fees24hUSD
+    fees30dUSD
+    id
+    lpToken {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    lpTokenAddress
+    lpTokenPrice
+    lpTokenPriceUSD
+    name
+    tokens {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    tvlBase
+    tvlUSD
+    tvlUSD24hChange
+    txCount
+    volume24hBase
+    volume24hETH
+    volume24hUSD
+    volume30d
+    volume30dUSD
+    volumeUSD24hChange
+  }
+}
+    `;
+
+/**
+ * __useGetPortfoliosListQuery__
+ *
+ * To run a query within a Vue component, call `useGetPortfoliosListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPortfoliosListQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetPortfoliosListQuery();
+ */
+export function useGetPortfoliosListQuery(options: VueApolloComposable.UseQueryOptions<GetPortfoliosListQuery, GetPortfoliosListQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetPortfoliosListQuery, GetPortfoliosListQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetPortfoliosListQuery, GetPortfoliosListQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetPortfoliosListQuery, GetPortfoliosListQueryVariables>(GetPortfoliosListDocument, {}, options);
+}
+export function useGetPortfoliosListLazyQuery(options: VueApolloComposable.UseQueryOptions<GetPortfoliosListQuery, GetPortfoliosListQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetPortfoliosListQuery, GetPortfoliosListQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetPortfoliosListQuery, GetPortfoliosListQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetPortfoliosListQuery, GetPortfoliosListQueryVariables>(GetPortfoliosListDocument, {}, options);
+}
+export type GetPortfoliosListQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetPortfoliosListQuery, GetPortfoliosListQueryVariables>;
+export const GetTvlStatisticDocument = gql`
+    query getTvlStatistic($start: LocalDateTime, $end: LocalDateTime, $interval: IntervalType) {
+  factories(
+    first: 100
+    where: {interval: $interval, dateTime_gt: $start, dateTime_lt: $end}
+  ) {
+    id
+    dateTime
+    tvlUSD
+  }
+}
+    `;
+
+/**
+ * __useGetTvlStatisticQuery__
+ *
+ * To run a query within a Vue component, call `useGetTvlStatisticQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTvlStatisticQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetTvlStatisticQuery({
+ *   start: // value for 'start'
+ *   end: // value for 'end'
+ *   interval: // value for 'interval'
+ * });
+ */
+export function useGetTvlStatisticQuery(variables: GetTvlStatisticQueryVariables | VueCompositionApi.Ref<GetTvlStatisticQueryVariables> | ReactiveFunction<GetTvlStatisticQueryVariables> = {}, options: VueApolloComposable.UseQueryOptions<GetTvlStatisticQuery, GetTvlStatisticQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTvlStatisticQuery, GetTvlStatisticQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTvlStatisticQuery, GetTvlStatisticQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetTvlStatisticQuery, GetTvlStatisticQueryVariables>(GetTvlStatisticDocument, variables, options);
+}
+export function useGetTvlStatisticLazyQuery(variables: GetTvlStatisticQueryVariables | VueCompositionApi.Ref<GetTvlStatisticQueryVariables> | ReactiveFunction<GetTvlStatisticQueryVariables> = {}, options: VueApolloComposable.UseQueryOptions<GetTvlStatisticQuery, GetTvlStatisticQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTvlStatisticQuery, GetTvlStatisticQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTvlStatisticQuery, GetTvlStatisticQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetTvlStatisticQuery, GetTvlStatisticQueryVariables>(GetTvlStatisticDocument, variables, options);
+}
+export type GetTvlStatisticQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTvlStatisticQuery, GetTvlStatisticQueryVariables>;
+export const GetTokensListDocument = gql`
+    query getTokensList {
+  tokens(first: 50, orderBy: name, orderDirection: desc) {
+    addressId
+    amount
+    decimals
+    depositEMAPrice
+    depositLimit
+    fees24hETH
+    fees24hUSD
+    fees30dUSD
+    id
+    name
+    portfolioShare
+    priceBase
+    priceETH
+    priceUSD
+    symbol
+    targetWeight
+    totalSupply
+    tvlETH
+    tvlUSD
+    tvlUSD24hChange
+    volume24hETH
+    volume24hUSD
+    volume30dUSD
+    volumeUSD24hChange
+    volumeUSD7dChange
+    withdrawEMAPrice
+    withdrawLimit
+  }
+}
+    `;
+
+/**
+ * __useGetTokensListQuery__
+ *
+ * To run a query within a Vue component, call `useGetTokensListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTokensListQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetTokensListQuery();
+ */
+export function useGetTokensListQuery(options: VueApolloComposable.UseQueryOptions<GetTokensListQuery, GetTokensListQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTokensListQuery, GetTokensListQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTokensListQuery, GetTokensListQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetTokensListQuery, GetTokensListQueryVariables>(GetTokensListDocument, {}, options);
+}
+export function useGetTokensListLazyQuery(options: VueApolloComposable.UseQueryOptions<GetTokensListQuery, GetTokensListQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTokensListQuery, GetTokensListQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTokensListQuery, GetTokensListQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetTokensListQuery, GetTokensListQueryVariables>(GetTokensListDocument, {}, options);
+}
+export type GetTokensListQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTokensListQuery, GetTokensListQueryVariables>;
 export const GetTopPortfoliosDocument = gql`
     query getTopPortfolios {
   portfolios(first: 50, orderBy: name, orderDirection: desc) {
-    id
-    tvlUSD
-    name
-    lpToken {
-      priceUSD
-    }
-    tokens {
+    addressId
+    baseToken {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
       name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
     }
+    baseTokenAddress
+    fees24hETH
+    fees24hUSD
+    fees30dUSD
+    id
+    lpToken {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    lpTokenAddress
+    lpTokenPrice
+    lpTokenPriceUSD
+    name
+    tokens {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    tvlBase
+    tvlUSD
+    tvlUSD24hChange
+    txCount
+    volume24hBase
+    volume24hETH
+    volume24hUSD
+    volume30d
+    volume30dUSD
+    volumeUSD24hChange
   }
 }
     `;
@@ -769,11 +1203,33 @@ export type GetTopPortfoliosQueryCompositionFunctionResult = VueApolloComposable
 export const GetTopTokensDocument = gql`
     query getTopTokens {
   tokens(first: 50, orderBy: name, orderDirection: desc) {
+    addressId
+    amount
+    decimals
+    depositEMAPrice
+    depositLimit
+    fees24hETH
+    fees24hUSD
+    fees30dUSD
     id
     name
+    portfolioShare
+    priceBase
+    priceETH
     priceUSD
+    symbol
+    targetWeight
+    totalSupply
+    tvlETH
     tvlUSD
+    tvlUSD24hChange
+    volume24hETH
     volume24hUSD
+    volume30dUSD
+    volumeUSD24hChange
+    volumeUSD7dChange
+    withdrawEMAPrice
+    withdrawLimit
   }
 }
     `;

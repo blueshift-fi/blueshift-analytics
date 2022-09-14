@@ -6,7 +6,7 @@
         v-for="token in visibleList"
         :key="token.symbol"
       >
-        <TokenIcon :source="token.icon" :size="imgPlaceholder ? '64' : iconSize"> </TokenIcon>
+        <TokenIcon :addressId="token.addressId" :size="imgPlaceholder ? '64' : iconSize"> </TokenIcon>
         <q-tooltip class="ui-tooltip" anchor="top middle" self="bottom middle" v-if="!imgPlaceholder">
           {{ token.symbol }}
         </q-tooltip>
@@ -25,7 +25,7 @@
                 v-for="token in tooltipList"
                 :key="token.symbol"
               >
-                <TokenIcon :source="token.icon" :size="iconSize" />
+                <TokenIcon :address-id="token.addressId" :size="iconSize" />
                 <div class="q-ml-2">{{ token.symbol }}</div>
               </div>
             </div>

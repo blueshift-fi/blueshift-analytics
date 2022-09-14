@@ -1,9 +1,10 @@
 import { IChartApi, ISeriesApi, MouseEventParams } from 'lightweight-charts';
 import { getDate } from '@/utils/getDate';
 import { getConvertedNumber } from '@/utils/getConvertedNumber';
+import moment from 'moment';
 
 export type UseChartTooltip = {
-  createChartTooltip: (chart: IChartApi, areaSeries: ISeriesApi<'Area'>, wrapper: HTMLElement, dataRef?: HTMLElement, lastValue?: string) => void,
+  createChartTooltip: (chart: IChartApi, areaSeries: ISeriesApi<'Area' | 'Histogram'>, wrapper: HTMLElement, dataRef?: HTMLElement, lastValue?: string) => void,
 }
 
 export type CrosshairMoveHandler = ((param: MouseEventParams) => void) | null;
@@ -11,7 +12,7 @@ export type CrosshairMoveHandler = ((param: MouseEventParams) => void) | null;
 export const useChartTooltip = (): UseChartTooltip => {
   let crosshairMoveHandler: CrosshairMoveHandler = null;
 
-  const createChartTooltip = (chart: IChartApi, areaSeries: ISeriesApi<'Area'>, wrapper: HTMLElement, dataRef?: HTMLElement, lastValue?: string) => {
+  const createChartTooltip = (chart: IChartApi, areaSeries: ISeriesApi<'Area' | 'Histogram'>, wrapper: HTMLElement, dataRef?: HTMLElement, lastValue?: string) => {
     crosshairMoveHandler = (param: MouseEventParams) => {
       if(!dataRef) { return; }
 
@@ -24,8 +25,12 @@ export const useChartTooltip = (): UseChartTooltip => {
       const dateStr = <number>param.time;
       const price = param.seriesPrices.get(areaSeries);
 
-      // const activePeriod: PeriodItem = getPeriodItem(period);
-      dataRef.querySelector('.date')!.innerHTML = getDate(dateStr);
+      if (areaSeries.seriesType() === 'Histogram') {
+        // TODO moment().subtract(7,'d').format('YYYY-MM-DD') to function
+        dataRef.querySelector('.date')!.innerHTML = `${moment(dateStr).subtract(1,'d').format('DD MMM')} - ${getDate(dateStr, 'DD MMM')}`;
+      } else {
+        dataRef.querySelector('.date')!.innerHTML = getDate(dateStr, 'DD MMM YYYY (HH:mm)');
+      }
       dataRef.querySelector('.value')!.innerHTML = getConvertedNumber({
         number: price as number,
         currency: 'USD'

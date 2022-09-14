@@ -5,7 +5,7 @@
   "extensions": {
     "endpoints": {
       "Get All": {
-        "url": "http://localhost:3301/graphql",
+        "url": "http://172.22.1.206:3301/graphql",
         "headers": {
           "user-agent": "JS GraphQL"
         },

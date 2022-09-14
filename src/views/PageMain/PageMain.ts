@@ -11,7 +11,9 @@ import TransactionsTable from '@/components/TransactionsTable/TransactionsTable.
 import PortfoliosTable from '@/components/PortfoliosTable/PortfoliosTable.vue';
 import { PortfoliosGettersNames } from '@/store/modules/portfolios/names/getters.names';
 import { PortfoliosActionsNames } from '@/store/modules/portfolios/names/actions.names';
-import Chart from '@/components/PortfolioChart/PortfolioChart.vue';
+import { RouterNames } from '@/router/router.names';
+import TvlChart from '@/components/TvlChart/TvlChart.vue';
+import Volume24hChart from '@/components/Volume24hChart/Volume24hChart.vue';
 
 export default defineComponent({
   name: 'PageMain',
@@ -20,7 +22,8 @@ export default defineComponent({
     TokensTable,
     TransactionsTable,
     PortfoliosTable,
-    Chart
+    TvlChart,
+    Volume24hChart
   },
 
   setup() {
@@ -42,13 +45,13 @@ export default defineComponent({
     });
 
     return {
-      data: [{ time: 9999999, value: 167 }, { time: 99994999, value: 169 }, { time: 99999999, value: 142 }],
       isLoadingTopTokens,
       topTokens,
       isLoadingTopTransactions,
       topTransactions,
       isLoadingTopPortfolios,
-      topPortfolios
+      topPortfolios,
+      RouterNames
     };
   }
 });

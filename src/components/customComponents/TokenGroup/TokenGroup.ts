@@ -30,14 +30,14 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const count = Math.min(props.iconCount, props.tokens?.length);
+    const count = computed(() => Math.min(props.iconCount, props.tokens?.length));
 
     const visibleList = computed(() =>
-      props.tokens ? props.tokens.slice(0, count) : null
+      props.tokens ? props.tokens.slice(0, count.value) : null
     );
 
     const tooltipList = computed(() =>
-      props.tokens ? props.tokens.slice(-(props.tokens.length - count)) : null
+      props.tokens ? props.tokens.slice(-(props.tokens.length - count.value)) : null
     );
 
     const getPlus = () => {
@@ -50,6 +50,7 @@ export default defineComponent({
       visibleList,
       tooltipList,
       getPlus,
+      count
     };
   },
 });

@@ -49,12 +49,16 @@ type Explorer {
 
 type Factory {
   dateTime: LocalDateTime
+  fees24hChange: BigDecimal
+  fees24hUSD: BigDecimal
   id: ID
   interval: IntervalType
-  totalFeesUSD: BigDecimal
-  totalValueLockedUSD: BigDecimal
-  totalVolumeUSD: BigDecimal
+  tvl24hChange: BigDecimal
+  tvlUSD: BigDecimal
   txCount: Long
+  txCount24hChange: Long
+  volume24hChange: BigDecimal
+  volume24hUSD: BigDecimal
 }
 
 type Health {
@@ -277,8 +281,9 @@ enum Burn_orderBy {
 
 enum Factory_orderBy {
   dateTime
-  totalValueLockedUSD
-  totalVolumeUSD
+  fees24hUSD
+  tvlUSD
+  volume24hUSD
 }
 
 enum HealthType {
@@ -342,7 +347,7 @@ enum Portfolio_orderBy {
   addressId
   id
   name
-  totalValueLockedUSD
+  tvlUSD
 }
 
 enum Swap_orderBy {
@@ -359,7 +364,7 @@ enum Token_orderBy {
   id
   name
   symbol
-  totalValueLockedUSD
+  tvlUSD
 }
 
 enum Transaction_orderBy {
@@ -398,6 +403,7 @@ input Burn_filter {
 input Factory_filter {
   dateTime: LocalDateTime
   dateTime_gt: LocalDateTime
+  dateTime_lt: LocalDateTime
   interval: IntervalType
 }
 

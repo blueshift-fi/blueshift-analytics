@@ -1,7 +1,7 @@
 <template>
   <div class="ui-token-icon" :style="`width: ${imgSize}; height: ${imgSize}`">
-    <q-skeleton type="circle" v-if="!source" />
-    <img :src="source" :alt="alt" :style="`width: ${imgSize}; height: ${imgSize}`" v-else />
+    <q-skeleton type="circle" v-if="!addressId" />
+    <img :src="source" :alt="alt" :style="`width: ${imgSize}; height: ${imgSize}`" v-else @error="onErrorLoad" />
   </div>
 </template>
 

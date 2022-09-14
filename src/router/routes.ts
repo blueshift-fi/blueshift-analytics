@@ -25,7 +25,7 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: '/tokens/:id',
     name: RouterNames.TOKEN_PAGE,
-    component: () => import('@/views/PageTokenList/PageTokenList.vue')
+    component: () => import('@/views/PageToken/PageToken.vue')
   },
   {
     path: '/ui',

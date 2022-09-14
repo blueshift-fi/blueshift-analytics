@@ -16,6 +16,10 @@ export default defineComponent({
     title: {
       type: String,
     },
+    chartType: {
+      type: String as PropType<'Area' | 'Histogram'>,
+      default: 'Area',
+    },
     isLoading: {
       type: Boolean,
       required: true
@@ -40,13 +44,13 @@ export default defineComponent({
         control.value.chart.timeScale().fitContent();
         control.value.useTooltip.createChartTooltip(
           control.value?.chart,
-          toRaw(control.value?.areaSeries),
+          toRaw(control.value.areaSeries),
           chartRef.value!,
           titleRef.value,
           lastValue.value
         );
       } else {
-        control.value = useCreateChart(chartRef.value!, props.data);
+        control.value = useCreateChart(chartRef.value!, props.data, props.chartType);
         control.value.useTooltip.createChartTooltip(
           control.value?.chart,
           toRaw(control.value.areaSeries),
@@ -58,7 +62,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      control.value = useCreateChart(chartRef.value!, props.data);
+      control.value = useCreateChart(chartRef.value!, props.data, props.chartType);
       control.value.useTooltip.createChartTooltip(
         control.value?.chart,
         toRaw(control.value.areaSeries),

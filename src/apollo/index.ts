@@ -12,7 +12,7 @@ export /* async */ function getClientOptions(
         uri:
           process.env.GRAPHQL_URI ||
           // Change to your graphql endpoint.
-          'http://localhost:3301/graphql',
+          'http://172.22.1.206:3301/graphql',
       }),
 
       cache: new InMemoryCache(),

@@ -1,12 +1,12 @@
 import { PortfolioIntervalDataDto } from '@/generated/graphql';
 import { MappedListItem } from '@/app.options/periodControllers';
 
-export type Statistic =  keyof PortfolioIntervalDataDto;
+export type Statistic = keyof PortfolioIntervalDataDto;
 
 export const getFullStatisticsControllerOptions = (): MappedListItem<Statistic>[] => [
   {
     id: 1,
-    data: 'tvlBase',
+    data: 'volume24hUSD',
     label: 'Volume'
   },
   {

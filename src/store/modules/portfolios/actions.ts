@@ -6,7 +6,6 @@ import { PortfoliosMutations } from '@/store/modules/portfolios/mutations';
 import { PortfoliosActionsNames } from '@/store/modules/portfolios/names/actions.names';
 import {
   Portfolio,
-  useGetPortfolioQuery,
   useGetStatPortfoliosQuery,
   useGetTopPortfoliosQuery
 } from '@/generated/graphql';
@@ -73,26 +72,6 @@ export const actions: ActionTree<PortfoliosState, RootState> & DaoListActions = 
 
   [PortfoliosActionsNames.SET_FILTER]({ commit, dispatch }, payload) {
     commit(PortfoliosMutationsNames.SET_STATISTIC_FILTER, payload);
-    //
-    // try {
-    //   const { result, error } = useGetStatPortfoliosQuery({
-    //     start: state.statisticFilter?.period.timeAgo.toString(),
-    //     end: new Date().getTime().toString(),
-    //     interval: state.statisticFilter?.period.interval,
-    //     portfolioAddress: state.portfolio.addressId
-    //   });
-    //   watch(() => result.value, () => {
-    //
-    //     if(error.value) throw new Error();
-    //
-    //     commit(PortfoliosMutationsNames.SET_STATISTIC, (result?.value?.portfolioIntervalDatas || []) as PortfolioStatistic[]);
-    //     commit(PortfoliosMutationsNames.SET_LOADING_STATISTIC, false);
-    //   }, { immediate: true });
-    // }
-    // catch (e) {
-    //   console.error(e);
-    //
-    // }
     void dispatch(`${PortfoliosActionsNames.FETCH_STATISTIC_FOR_PORTFOLIO}`);
   },
 };

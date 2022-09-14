@@ -1,24 +1,114 @@
 query getPortfolio($name: String) {
   portfolios(first: 50, orderBy: name, orderDirection: desc, where:{name: $name}) {
-    id
-    name
-    lpTokenAddress
-    tvlUSD
     addressId
-    lpToken {
-      priceUSD
-    }
     baseToken {
-      name
-      id
+      addressId
       amount
-    }
-    tokens {
-      name
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
       id
-      amount
-
+      name
+      portfolioShare
+#      portfolios: [Portfolio]
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
     }
+    baseTokenAddress
+    fees24hETH
+    fees24hUSD
     fees30dUSD
+    id
+    lpToken {
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+#      portfolios: [Portfolio]
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    lpTokenAddress
+    lpTokenPrice
+    lpTokenPriceUSD
+    name
+    tokens{
+      addressId
+      amount
+      decimals
+      depositEMAPrice
+      depositLimit
+      fees24hETH
+      fees24hUSD
+      fees30dUSD
+      id
+      name
+      portfolioShare
+#      portfolios: [Portfolio]
+      priceBase
+      priceETH
+      priceUSD
+      symbol
+      targetWeight
+      totalSupply
+      tvlETH
+      tvlUSD
+      tvlUSD24hChange
+      volume24hETH
+      volume24hUSD
+      volume30dUSD
+      volumeUSD24hChange
+      volumeUSD7dChange
+      withdrawEMAPrice
+      withdrawLimit
+    }
+    tvlBase
+    tvlUSD
+    tvlUSD24hChange
+    txCount
+    volume24hBase
+    volume24hETH
+    volume24hUSD
+    volume30d
+    volume30dUSD
+    volumeUSD24hChange
   }
 }

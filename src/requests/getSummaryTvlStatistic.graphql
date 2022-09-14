@@ -1,0 +1,7 @@
+query getTvlStatistic($start: LocalDateTime, $end: LocalDateTime, $interval: IntervalType) {
+  factories(first: 100, where: { interval: $interval, dateTime_gt: $start, dateTime_lt: $end} ) {
+    id
+    dateTime
+    tvlUSD
+  }
+}

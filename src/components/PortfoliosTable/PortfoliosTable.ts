@@ -7,6 +7,8 @@ import TokenFullName from '@/components/customComponents/TokenFullName/TokenFull
 import { RouterNames } from '@/router/router.names';
 import { getDataForCell } from '@/utils/getDataForCell';
 import TokenGroup from '@/components/customComponents/TokenGroup/TokenGroup.vue';
+import { getConvertedNumber } from '@/utils/getConvertedNumber';
+import { Token } from 'graphql';
 
 export default defineComponent({
   name: 'PortfoliosTable',
@@ -28,44 +30,16 @@ export default defineComponent({
   },
 
   setup() {
-    const __mock = [
-      {
-        icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/5692.png',
-        symbol: 'COMP',
-      },
-      {
-        icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/6538.png',
-        symbol: 'CRV',
-      },
-      {
-        icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/18876.png',
-        symbol: 'APE',
-      },
-      {
-        icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7278.png',
-        symbol: 'AAVE',
-      },
-      {
-        icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7486.png',
-        symbol: 'RGT',
-      },
-      // {
-      //   icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2586.png',
-      //   symbol: 'SNX',
-      // },
-      // {
-      //   icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/5617.png',
-      //   symbol: 'UMA',
-      // },
-    ];
+
 
     return {
-      __mock,
+      Token,
       RouterNames,
       getDataForCell,
       PortfoliosTableColumnNames,
       getTemplateFullName,
       getVisibleColumn,
+      getConvertedNumber,
       getPortfoliosColumns,
     };
   },
